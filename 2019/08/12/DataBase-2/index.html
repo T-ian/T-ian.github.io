@@ -205,6 +205,13 @@
 <li>过程化语言：用户指导系统对数据库执行一系列操作以计算出所需结果。</li>
 <li>非过程化语言：用户只需描述所需信息，不用给出获取信息的具体过程。</li>
 </ul>
+<h1 id="关系运算"><a href="#关系运算" class="headerlink" title="关系运算"></a>关系运算</h1><ul>
+<li>σ选择<br><code>返回满足要求的元组</code><br>示例：σ<sub>salary&gt;=5000</sub>(instructor)</li>
+<li>∏投影<br><code>返回输入关系中所有元组的指定属性，并去除重复元组</code><br>示例：∏<sub>ID,salary</sub>(instructor)</li>
+<li>▷◁自然连接<br><code>从参与运算的两个关系中返回在所有共同属性下取值相同的元组对</code><br>示例：instructor ▷◁ department</li>
+<li>×笛卡尔积<br><code>从参与运算的两个关系中返回所有元组对，无论共同属性取值是否一致</code><br>示例：instructor × department</li>
+<li>∪并<br><code>返回参与运算的两个关系中元组的并集</code><br>示例：∏<sub>name</sub>(instructor) ∪ ∏<sub>name</sub>(student)</li>
+</ul>
 
         </div>
 

@@ -192,6 +192,52 @@
         <div class="post-content">
             <h1 id="基本类型"><a href="#基本类型" class="headerlink" title="基本类型"></a>基本类型</h1><p>SQL支持char、varchar、int、smallint（小整数类型）、numeric(p,d)（定点数）和浮点数等数据类型。</p>
 <h2 id="char和varchar的区别"><a href="#char和varchar的区别" class="headerlink" title="char和varchar的区别"></a>char和varchar的区别</h2><p>char定义固定长度的字符串，内容不足则补空格。varchar定义可变长度的字符串。</p>
+<h1 id="基本模式定义"><a href="#基本模式定义" class="headerlink" title="基本模式定义"></a>基本模式定义</h1><h2 id="建表"><a href="#建表" class="headerlink" title="建表"></a>建表</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> 表名(</span><br><span class="line">    属性名 属性域,</span><br><span class="line">    ...</span><br><span class="line">    完整性约束</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h2 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> 关系名</span><br><span class="line">    <span class="keyword">values</span>(属性值<span class="number">1</span>,属性值<span class="number">2</span>,...);</span><br></pre></td></tr></table></figure>
+
+<h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> 关系名;</span><br><span class="line"><span class="comment">-- 或</span></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> 关系名;</span><br></pre></td></tr></table></figure>
+
+<p>delete命令保留关系，只删除关系中所有元组。drop命令从数据库中删掉关系。</p>
+<h2 id="修改属性"><a href="#修改属性" class="headerlink" title="修改属性"></a>修改属性</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> 关系名 <span class="keyword">add</span> 属性名 属性域;</span><br><span class="line"><span class="comment">-- 为关系添加属性，初值为null</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> 关系名 <span class="keyword">drop</span> 属性名;</span><br><span class="line"><span class="comment">-- 从关系中删除属性(很多数据库不支持去掉属性)</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="SQL查询"><a href="#SQL查询" class="headerlink" title="SQL查询"></a>SQL查询</h1><h2 id="单关系查询"><a href="#单关系查询" class="headerlink" title="单关系查询"></a>单关系查询</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> 属性名</span><br><span class="line"><span class="keyword">from</span> 关系名;</span><br><span class="line"><span class="comment">/* 等同于</span></span><br><span class="line"><span class="comment">select all 属性名</span></span><br><span class="line"><span class="comment">from 关系名;</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>该语句从关系中将所有指定属性的值返回。多个元组在该属性上可以取相同值，因此返回结果会出现重复。如果不希望出现重复，使用distinct关键词去重。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">distinct</span> 属性名</span><br><span class="line"><span class="keyword">from</span> 关系名;</span><br></pre></td></tr></table></figure>
+
+<p>where子句可从select结果中选择符合特定要求的元组：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> 属性名</span><br><span class="line"><span class="keyword">from</span> 关系名</span><br><span class="line"><span class="keyword">where</span> 条件<span class="number">1</span> 逻辑连接词 条件<span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<p>其中逻辑连接词有and，or，not。条件可以是包含比较运算符的表达式。</p>
+<h2 id="多关系查询"><a href="#多关系查询" class="headerlink" title="多关系查询"></a>多关系查询</h2><p>例如，现在有两个关系表，表1包含学生ID，姓名，性别等基本信息，表2包含学生ID，成绩，学分等学业信息。现在需要从这两个表中找出所有学生的ID、姓名和成绩。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> table1.ID, 姓名, 成绩</span><br><span class="line"><span class="keyword">from</span> table1, table2</span><br><span class="line"><span class="keyword">where</span> table1.ID = table2.ID;</span><br><span class="line"><span class="comment">-- where子句实际上执行的是自然连接运算，可以写成如下形式</span></span><br><span class="line"><span class="keyword">select</span> table1.ID, 姓名, 成绩</span><br><span class="line"><span class="keyword">from</span> table1 <span class="keyword">natural</span> <span class="keyword">join</span> table2;</span><br></pre></td></tr></table></figure>
+
+<p>对于同时出现在两表中的属性ID来说，需要使用关系名前缀来特指。<br><code>注意，如果在上述一句中忘记使用where子句，则查询结果会是两个关系的笛卡尔积</code></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> table1.ID, 姓名, 成绩</span><br><span class="line"><span class="keyword">from</span> table1 <span class="keyword">natural</span> <span class="keyword">join</span> table2, table3</span><br><span class="line"><span class="keyword">where</span> table2.ID = table3.ID</span><br></pre></td></tr></table></figure>
+
+<p>在上面这个例子中，table1先与table2进行自然连接运算，再和table3进行笛卡尔积，最后根据where子句进行选择。</p>
+<h1 id="附加运算"><a href="#附加运算" class="headerlink" title="附加运算"></a>附加运算</h1><ul>
+<li>更名运算。<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> oldName <span class="keyword">as</span> newName</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>用于select或from子句中，将oldName重命名为newName。</p>
+<ul>
+<li>匹配符号。<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> table1.*</span><br><span class="line">...</span><br><span class="line">;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>select子句中使用，表示table1中所有属性。</p>
+<ul>
+<li>结果排序。<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> ... <span class="keyword">from</span> ... <span class="keyword">where</span> ...</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> salary <span class="keyword">desc</span>, <span class="keyword">ID</span> <span class="keyword">asc</span>;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>desc表示降序，asc表示升序。上句表示先按照工资降序排列，对于工资相同的，按照ID升序排列。</p>
+<ul>
+<li>比较运算符<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 表取值范围</span></span><br><span class="line"><span class="keyword">select</span> ... <span class="keyword">from</span> ...</span><br><span class="line"><span class="keyword">where</span> salary <span class="keyword">between</span> <span class="number">9000</span> <span class="keyword">and</span> <span class="number">10000</span>;</span><br><span class="line"><span class="comment">-- 用元组来批量对比</span></span><br><span class="line"><span class="keyword">select</span> ... <span class="keyword">from</span> ...</span><br><span class="line"><span class="keyword">where</span> (a, b, c, ...) &gt;= (A, B, C, ...);</span><br></pre></td></tr></table></figure></li>
+</ul>
 
         </div>
 
