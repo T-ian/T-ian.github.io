@@ -236,7 +236,37 @@
 </ul>
 <p>desc表示降序，asc表示升序。上句表示先按照工资降序排列，对于工资相同的，按照ID升序排列。</p>
 <ul>
-<li>比较运算符<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 表取值范围</span></span><br><span class="line"><span class="keyword">select</span> ... <span class="keyword">from</span> ...</span><br><span class="line"><span class="keyword">where</span> salary <span class="keyword">between</span> <span class="number">9000</span> <span class="keyword">and</span> <span class="number">10000</span>;</span><br><span class="line"><span class="comment">-- 用元组来批量对比</span></span><br><span class="line"><span class="keyword">select</span> ... <span class="keyword">from</span> ...</span><br><span class="line"><span class="keyword">where</span> (a, b, c, ...) &gt;= (A, B, C, ...);</span><br></pre></td></tr></table></figure></li>
+<li>比较运算符<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 表取值范围</span></span><br><span class="line"><span class="keyword">select</span> ... <span class="keyword">from</span> ...</span><br><span class="line"><span class="keyword">where</span> salary <span class="keyword">between</span> <span class="number">9000</span> <span class="keyword">and</span> <span class="number">10000</span>;</span><br><span class="line"><span class="comment">-- 用元组来批量对比</span></span><br><span class="line"><span class="keyword">select</span> ... <span class="keyword">from</span> ...</span><br><span class="line"><span class="keyword">where</span> (a, b, c, ...) &gt;= (A, B, C, ...);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h1 id="集合运算"><a href="#集合运算" class="headerlink" title="集合运算"></a>集合运算</h1><ul>
+<li><p>并运算</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 不保留重复</span></span><br><span class="line">(<span class="keyword">select</span> ... from...  where...)</span><br><span class="line"><span class="keyword">union</span></span><br><span class="line">(<span class="keyword">select</span> ... from... where...);</span><br><span class="line"><span class="comment">-- 保留重复</span></span><br><span class="line">(<span class="keyword">select</span> ...  <span class="keyword">from</span> ... where...)</span><br><span class="line"><span class="keyword">union</span> <span class="keyword">all</span></span><br><span class="line">(<span class="keyword">select</span> ... <span class="keyword">from</span> ... where...);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>交运算</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 可选择使用all保留重复</span></span><br><span class="line">(<span class="keyword">select</span> ...)</span><br><span class="line"><span class="keyword">intersect</span> [<span class="keyword">all</span>]</span><br><span class="line">(<span class="keyword">select</span> ...);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>差运算</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">select</span> ...)</span><br><span class="line"><span class="keyword">except</span> [<span class="keyword">all</span>]</span><br><span class="line">(<span class="keyword">select</span> ...)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h1 id="空值"><a href="#空值" class="headerlink" title="空值"></a>空值</h1><ul>
+<li>算术表达式中，任一输入为空值，结果为空值。</li>
+<li>涉及空值的任何比较运算结果都是unknown。unknown值可与true和false进行布尔运算。</li>
+<li>where子句中，计算出false和unknown值则不加入结果集。</li>
+<li>使用关键词null可以测试空值：<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> ... <span class="keyword">from</span> ...</span><br><span class="line"><span class="keyword">where</span> salary <span class="keyword">is</span> <span class="literal">null</span>;</span><br><span class="line"><span class="comment">-- 或</span></span><br><span class="line"><span class="keyword">select</span> ... <span class="keyword">from</span> ...</span><br><span class="line"><span class="keyword">where</span> salary <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h1 id="聚集函数"><a href="#聚集函数" class="headerlink" title="聚集函数"></a>聚集函数</h1><p>输入值的集合，返回单个值的函数。SQL提供五个基本聚集函数：均值avg，最值min、max，求和sum，计数count。</p>
+<ul>
+<li><p>基本聚集和分组聚集<br>基本聚集的查询结果是一个具有单属性的关系。分组聚集是在查询基础上，按照某个指定属性分类展示查询结果，对于指定属性，具有相同值的元组将归入一组。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 基本聚集</span></span><br><span class="line"><span class="keyword">select</span> ...;</span><br><span class="line"><span class="comment">-- 分组聚集</span></span><br><span class="line"><span class="keyword">select</span> ...</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> 指定属性;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>having子句<br>having子句中的谓词只对分组后起作用。它对分组提出限定条件并获得结果。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> ...</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> ...</span><br><span class="line"><span class="keyword">having</span> 限定条件;</span><br></pre></td></tr></table></figure></li>
 </ul>
 
         </div>
