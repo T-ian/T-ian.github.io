@@ -7,7 +7,7 @@
 
 
 
-<title>算法 | T-ian</title>
+<title>两数之和 | T-ian</title>
 
 
 
@@ -99,11 +99,73 @@
             <div class="container">
     
     
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
 
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">算法</h1>
+            <h1 class="post-title">两数之和</h1>
             
                 <div class="post-meta">
                     
@@ -128,7 +190,22 @@
         </header>
 
         <div class="post-content">
-            <p>123</p>
+            <hr>
+<p><a href="https://leetcode-cn.com/problems/two-sum/" target="_blank" rel="noopener">查看题目👆</a> </p>
+<hr>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; twoSum1(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> target) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;nums.size(); ++i)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>; j&lt;nums.size(); ++j)</span><br><span class="line">                <span class="keyword">if</span>(nums[j] == target - nums[i])</span><br><span class="line">                    <span class="keyword">return</span> &#123;i, j&#125;;</span><br><span class="line">        <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; twoSum2(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> target)&#123;</span><br><span class="line">        <span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; check;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;nums.size(); ++i)</span><br><span class="line">            check.insert(<span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;::value_type(nums[i], i));</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;nums.size(); ++i)&#123;</span><br><span class="line">            <span class="keyword">int</span> tmp = target - nums[i];</span><br><span class="line">            <span class="keyword">if</span>(check.count(tmp) != <span class="number">0</span> &amp;&amp; check[tmp] != i)</span><br><span class="line">                <span class="keyword">return</span> &#123;i, check[tmp]&#125;;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    Solution s;</span><br><span class="line">    <span class="keyword">int</span> tmp[<span class="number">4</span>] = &#123;<span class="number">2</span>, <span class="number">10</span>, <span class="number">12</span>, <span class="number">7</span>&#125;, target = <span class="number">9</span>;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; nums(tmp, tmp+<span class="number">4</span>);</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; result = s.twoSum2(nums, target);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;result.size();++i)</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; result[i] &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><p><code>twoSum1()</code>方法采用的是双循环遍历法。时间复杂度为O(N<sup>2</sup>)，实际运行时间约300ms。<code>twoSum2()</code>方法采用的是两次循环哈希表法，纸面时间复杂度为O(N)，实际运行时间约30ms。涉及到的C++知识有:</p>
+<ul>
+<li><p>vector模板</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建一个vector向量</span></span><br><span class="line"><span class="built_in">vector</span>&lt;DataType&gt; vecName;</span><br><span class="line"><span class="comment">// 初始化vector向量</span></span><br><span class="line"><span class="built_in">vector</span>&lt;DataType&gt; vecName1 = &#123;...&#125;;</span><br><span class="line">DataType <span class="built_in">array</span>[n] = &#123;...&#125;;</span><br><span class="line"><span class="built_in">vector</span>&lt;DataType&gt; vecName2(<span class="built_in">array</span>, <span class="built_in">array</span>+n);</span><br><span class="line"><span class="comment">// 获取vector向量的长度</span></span><br><span class="line">vectorName.size();</span><br><span class="line"><span class="comment">// 访问vector向量的元素</span></span><br><span class="line">vectorName[index]; <span class="comment">// 重载'['，']'</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>map标准库模板</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建一个map对象</span></span><br><span class="line"><span class="built_in">map</span>&lt;key_type, value_type&gt; mapName;</span><br><span class="line"><span class="comment">// 用insert方法向map中插入元素</span></span><br><span class="line">mapName.insert(&#123;key, value&#125;);</span><br><span class="line">mapName.insert(<span class="built_in">map</span>&lt;key_type, value_type&gt;::value_type(key, value));</span><br><span class="line"><span class="comment">// 查找某值是否存在</span></span><br><span class="line">mapName.<span class="built_in">cout</span>(key);  <span class="comment">// count方法返回key出现的次数，在map中只有0和1两值</span></span><br><span class="line"><span class="comment">// 查找某值对应下标</span></span><br><span class="line">index = mapName[key];</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h1 id="思想"><a href="#思想" class="headerlink" title="思想"></a>思想</h1><p>对于数组一类问题，相关的数据结构有顺序表（数组）、链表、哈希表、多元组等。根据题目对空间和时间的不同要求，可以采用不同的数据结构来优化代码，这里使用哈希表降低了时间复杂度。</p>
 
         </div>
 
@@ -157,7 +234,7 @@
                 <span class="tag">
                     
                     
-                        <a href="/tags/Algorithm/"># Algorithm</a>
+                        <a href="/tags/LeetCode/"># LeetCode</a>
                     
                         
                 </span>
