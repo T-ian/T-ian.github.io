@@ -7,7 +7,7 @@
 
 
 
-<title>中级SQL | T-ian</title>
+<title>JavaNotes | T-ian</title>
 
 
 
@@ -165,7 +165,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">中级SQL</h1>
+            <h1 class="post-title">JavaNotes</h1>
             
                 <div class="post-meta">
                     
@@ -174,37 +174,24 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">八月 18, 2019&nbsp;&nbsp;23:15:51</a>
+                        Date: <a href="#">九月 16, 2019&nbsp;&nbsp;17:00:49</a>
                         </span>
                     
-                    
-                        <span class="post-category">
-                    Category:
-                            
-                                <a href="/categories/数据库笔记/">数据库笔记</a>
-                            
-                        </span>
                     
                 </div>
             
         </header>
 
         <div class="post-content">
-            <h1 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h1><ul>
-<li>虚关系<br>数据库使用种，出于安全性等原因考虑，不可能让用户看到整个逻辑模型。如果将指定用户所需关系集合通过查询运算存储下来，又会带来新的问题——当原始数据发生变化时，计算后的结果不可能随之更新。SQL允许定义<strong>虚关系</strong>来解决这个问题，只有在使用虚关系的时候才会执行计算。</li>
-</ul>
-<p>作为虚关系对用户可见的关系称为视图。定义格式为：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">view</span> v <span class="keyword">as</span> &lt;<span class="keyword">query</span> expression&gt;;</span><br></pre></td></tr></table></figure>
+            <h1 id="1"><a href="#1" class="headerlink" title="1"></a>1</h1><p>JAVA程序中至少包含一个类，这个类与文件名同名，JAVA虚拟机通过命令列的指引找到这个类，执行类中位于main函数里的语句。</p>
+<h1 id="2"><a href="#2" class="headerlink" title="2"></a>2</h1><p>JAVA中使用boolean类型变量作为条件判断的测试参数，与C++不同，JAVA不接受integer类型变量作为测试参数。</p>
+<h1 id="3"><a href="#3" class="headerlink" title="3"></a>3</h1><p><code>System.out.print()</code>在一行内打印，<code>System.out.println()</code>在输出结尾自动补上换行符。</p>
+<h1 id="4"><a href="#4" class="headerlink" title="4"></a>4</h1><p>JAVA创建对象时将其存放在堆中，根据对象大小为其分配空间，当JAVA虚拟机察觉到某个对象不会再被用到时将自动回收相应内存。</p>
+<h1 id="5"><a href="#5" class="headerlink" title="5"></a>5</h1><p>实例变量声明在类之中，它们有初始值，0、false或null；局部变量声明在方法中，它无默认值，使用前必须初始化否则编译出错。</p>
+<h1 id="6"><a href="#6" class="headerlink" title="6"></a>6</h1><p>JAVA5中的for循环语句可以写成：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(Type iterator : elementsSet) &#123;&#125;</span><br></pre></td></tr></table></figure>
 
-<h1 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h1><p>SQL规定当一条SQL语句被执行时，就隐式地开始了一个事务。在事务执行的过程中，如果正常执行则通过<code>Commit work</code>提交当前事务；如果执行出错则通过<code>Rollback work</code>回滚当前事务。从而保证SQL语句执行的原子性，不会出现数据库被部分更新的情况。</p>
-<h1 id="授权"><a href="#授权" class="headerlink" title="授权"></a>授权</h1><p>可授予四个权限：select、update、insert、delete。使用：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">grant</span> 权限列表</span><br><span class="line"><span class="keyword">on</span> 关系或视图名</span><br><span class="line"><span class="keyword">to</span> 用户列表</span><br></pre></td></tr></table></figure>
-
-<p>将指定关系中的权限授予目标用户。使用：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">revoke</span> 权限列表</span><br><span class="line"><span class="keyword">on</span> 关系或视图名</span><br><span class="line"><span class="keyword">from</span> 用户列表</span><br></pre></td></tr></table></figure>
-
-<p>从目标用户那里收回指定关系中的权限。</p>
-<h1 id="角色"><a href="#角色" class="headerlink" title="角色"></a>角色</h1><p>角色是对一类在用一组关系上具有相同类型权限的变量集合的抽象。数据库使用角色来对一组具有相同特性的变量进行授权要更加方便。</p>
+<p>表示使用iterator在elementsSet中进行循环遍历，每次从elementsSet中取出一个值放入iterator。可想而知iterator的类型要与elementsSet元素类型保持一致。</p>
 
         </div>
 
@@ -233,7 +220,7 @@
                 <span class="tag">
                     
                     
-                        <a href="/tags/数据库概念原书第六版/"># 数据库概念原书第六版</a>
+                        <a href="/tags/JAVA/"># JAVA</a>
                     
                         
                 </span>
@@ -246,10 +233,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2019/08/20/p2/">两数相加</a>
             
-            
-            <a class="next" rel="next" href="/2019/08/12/DataBase-3/">SQL</a>
+            <a class="next" rel="next" href="/2019/09/08/p4/">两个有序数组中位数</a>
             
         </section>
 

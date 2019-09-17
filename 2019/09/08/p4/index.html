@@ -7,7 +7,7 @@
 
 
 
-<title>中级SQL | T-ian</title>
+<title>两个有序数组中位数 | T-ian</title>
 
 
 
@@ -165,7 +165,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">中级SQL</h1>
+            <h1 class="post-title">两个有序数组中位数</h1>
             
                 <div class="post-meta">
                     
@@ -174,14 +174,14 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">八月 18, 2019&nbsp;&nbsp;23:15:51</a>
+                        Date: <a href="#">九月 8, 2019&nbsp;&nbsp;10:11:27</a>
                         </span>
                     
                     
                         <span class="post-category">
                     Category:
                             
-                                <a href="/categories/数据库笔记/">数据库笔记</a>
+                                <a href="/categories/算法学习/">算法学习</a>
                             
                         </span>
                     
@@ -190,22 +190,11 @@
         </header>
 
         <div class="post-content">
-            <h1 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h1><ul>
-<li>虚关系<br>数据库使用种，出于安全性等原因考虑，不可能让用户看到整个逻辑模型。如果将指定用户所需关系集合通过查询运算存储下来，又会带来新的问题——当原始数据发生变化时，计算后的结果不可能随之更新。SQL允许定义<strong>虚关系</strong>来解决这个问题，只有在使用虚关系的时候才会执行计算。</li>
-</ul>
-<p>作为虚关系对用户可见的关系称为视图。定义格式为：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">view</span> v <span class="keyword">as</span> &lt;<span class="keyword">query</span> expression&gt;;</span><br></pre></td></tr></table></figure>
-
-<h1 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h1><p>SQL规定当一条SQL语句被执行时，就隐式地开始了一个事务。在事务执行的过程中，如果正常执行则通过<code>Commit work</code>提交当前事务；如果执行出错则通过<code>Rollback work</code>回滚当前事务。从而保证SQL语句执行的原子性，不会出现数据库被部分更新的情况。</p>
-<h1 id="授权"><a href="#授权" class="headerlink" title="授权"></a>授权</h1><p>可授予四个权限：select、update、insert、delete。使用：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">grant</span> 权限列表</span><br><span class="line"><span class="keyword">on</span> 关系或视图名</span><br><span class="line"><span class="keyword">to</span> 用户列表</span><br></pre></td></tr></table></figure>
-
-<p>将指定关系中的权限授予目标用户。使用：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">revoke</span> 权限列表</span><br><span class="line"><span class="keyword">on</span> 关系或视图名</span><br><span class="line"><span class="keyword">from</span> 用户列表</span><br></pre></td></tr></table></figure>
-
-<p>从目标用户那里收回指定关系中的权限。</p>
-<h1 id="角色"><a href="#角色" class="headerlink" title="角色"></a>角色</h1><p>角色是对一类在用一组关系上具有相同类型权限的变量集合的抽象。数据库使用角色来对一组具有相同特性的变量进行授权要更加方便。</p>
-
+            <hr>
+<p><a href="https://leetcode-cn.com/problems/median-of-two-sorted-arrays/" target="_blank" rel="noopener">查看题目👆</a></p>
+<hr>
+<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><p>题目难度在于要求时间复杂度为O(log(m+n))。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> m = nums1.size(), n = nums2.size();</span><br><span class="line">        <span class="keyword">int</span> *combineSorted = <span class="keyword">new</span> <span class="keyword">int</span>[m+n];</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>, k = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(i &lt; m &amp;&amp; j &lt; n)&#123;</span><br><span class="line">            combineSorted[k++] = nums1[i] &lt; nums2[j] ? nums1[i++] : nums2[j++];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(i &lt; m)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> kp = i; kp &lt; m; kp++)</span><br><span class="line">                combineSorted[k++] = nums1[kp];</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> kp = j; kp &lt; n; kp++)</span><br><span class="line">                combineSorted[k++] = nums2[kp];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>((m+n) % <span class="number">2</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> combineSorted[(m+n)/<span class="number">2</span>];</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> (<span class="keyword">double</span>)(combineSorted[(m+n)/<span class="number">2</span><span class="number">-1</span>]+combineSorted[(m+n)/<span class="number">2</span>])/<span class="number">2</span>;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
         </div>
 
         
@@ -233,7 +222,7 @@
                 <span class="tag">
                     
                     
-                        <a href="/tags/数据库概念原书第六版/"># 数据库概念原书第六版</a>
+                        <a href="/tags/LeetCode/"># LeetCode</a>
                     
                         
                 </span>
@@ -246,10 +235,10 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2019/08/20/p2/">两数相加</a>
+                <a class="prev" rel="prev" href="/2019/09/16/JavaNotes/">JavaNotes</a>
             
             
-            <a class="next" rel="next" href="/2019/08/12/DataBase-3/">SQL</a>
+            <a class="next" rel="next" href="/2019/08/28/DataBase-5/">高级SQL</a>
             
         </section>
 
