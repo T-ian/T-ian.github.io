@@ -192,6 +192,8 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(Type iterator : elementsSet) &#123;&#125;</span><br></pre></td></tr></table></figure>
 
 <p>表示使用iterator在elementsSet中进行循环遍历，每次从elementsSet中取出一个值放入iterator。可想而知iterator的类型要与elementsSet元素类型保持一致。</p>
+<h1 id="7"><a href="#7" class="headerlink" title="7"></a>7</h1><p>JAVA中对象（实例变量）存放在堆中，方法（局部变量）存放在栈中。一个对象在被实例化的时候，只在堆上为它分配实例变量所需要的空间，如果对象的实例变量还是对象，则分情况讨论：若这个对象只被声明未被初始化，则只为其分配声明变量所需要的空间；若这个对象被初始化，则为这个对象分配其实例变量所需的空间。</p>
+<h1 id="8"><a href="#8" class="headerlink" title="8"></a>8</h1><p>JAVA中多层继承时，创建子类的对象将依次调用所有父类的构造函数。例如：在继承关系<code>dog</code> extends <code>DogLike</code> extends <code>Animal</code>中，如果实例化一个<code>dog</code>对象会把<code>dog()</code>、<code>DogLike()</code>、<code>Animal()</code>先后压入栈中，<code>Animal()</code>将位于栈顶，<code>Animal()</code>最晚进入栈，但是将最先被执行。这也符合逻辑——先要构造父类，才能用父类中继承并构造子类。<br>在子类中调用父类的构造函数，需要使用<code>super()</code>，如果程序员不指定，编译器将在子类构造函数中默认提供<code>super()</code>。前提是在父类中存在无参数的默认构造函数，否则将导致编译错误。</p>
 
         </div>
 
