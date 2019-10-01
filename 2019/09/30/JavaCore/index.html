@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+
+<title>《JAVA核心技术》阅读拾遗 | T-ian</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Home</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Home</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">《JAVA核心技术》阅读拾遗</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">TSheng</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">九月 30, 2019&nbsp;&nbsp;11:59:54</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="绪论"><a href="#绪论" class="headerlink" title="绪论"></a>绪论</h1><ol>
+<li><p>JAVA和C++的主要不同之处在于多继承；</p>
+</li>
+<li><p>即时编译：将使用最频繁的字节码序列翻译成机器码；</p>
+</li>
+<li><p>JAVA中的<code>int</code>永远为32位整数；</p>
+</li>
+</ol>
+<h1 id="JAVA基本程序设计结构"><a href="#JAVA基本程序设计结构" class="headerlink" title="JAVA基本程序设计结构"></a>JAVA基本程序设计结构</h1><ol>
+<li><p>JAVA中类名必须以字母开头，后面可以跟数字和字母的任意组合，长度无限制；</p>
+</li>
+<li><p>JAVA中<code>main</code>方法必须是静态的；</p>
+</li>
+<li><p>JAVA中<code>/* */</code>不能嵌套使用；</p>
+</li>
+<li><p>JAVA中共有8中基本数据类型：（4）整型+（2）浮点型+（1）字符型+（1）布尔型；JAVA中不存在无符号类型；</p>
+</li>
+<li><p><code>System.out.println(2.0-1.1);</code>，输出结果为<code>0.8999999999999999</code>，而不是预想中的<code>0.9</code>。原因是二进制无法精确表示分数1/10。</p>
+</li>
+<li><p>变量名必须是一个以字母开头的字母或数字构成的序列。需要注意，在JAVA中<code>字母</code>包括英文字母、连字符<code>&#39;-&#39;</code>以及Unicode中在不同语言中任何表示字母含义的字符；</p>
+</li>
+<li><p><code>const</code>是JAVA中的保留字，但是并未被使用；</p>
+</li>
+<li><p>JAVA位运算符包括<code>&amp;</code>（与）、<code>|</code>（或）、<code>^</code>（异或）、<code>!</code>（非）、<code>&gt;&gt;</code>（右移，用符号位填充高位）、<code>&gt;&gt;&gt;</code>（用0填充高位）、<code>&lt;&lt;</code>（左移），注意不存在&lt;&lt;&lt;操作符；</p>
+</li>
+<li><p>调用<code>Math.round()</code>函数进行舍入运算时需要注意，<code>round()</code>默认返回一个<code>long</code>型变量，应根据需要进行强制类型转换；</p>
+</li>
+<li><p>此表达式合法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String str = <span class="string">"Hello"</span>;</span><br><span class="line"><span class="keyword">boolean</span> same = <span class="string">"Hello"</span>.equals(str);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>java.lang.StringBuilder</code><br>&emsp;&emsp; 对于从较小字符串开始构建字符串的情况，使用传统的字符串连接方式效率低下，每次连接字符串都会构建一个新的String类。使用<code>StringBuilder</code>类，可以将后续字符串逐个添加到缓冲器中，需要输出时使用<code>toString()</code>方法一次性返回缓冲器中的字符长串。</p>
+</li>
+<li><p>从键盘读入数据</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Scanner in = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">String name = in.nextLine();    <span class="comment">// 一次输入一行</span></span><br><span class="line">String name = in.next();    <span class="comment">// 空格符作为分隔</span></span><br><span class="line"><span class="keyword">int</span> age = in.nextInt();     <span class="comment">// 读取一个整数</span></span><br><span class="line"><span class="keyword">double</span> score = in.nextDouble(); <span class="comment">// 读取一个浮点数</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>&emsp;&emsp; 对于从终端输入密码的情况，使用<code>Console</code>类更为合适。</p>
+<ol start="13">
+<li><p>JAVA没有<code>goto</code>语句，但是<code>break</code>语句后可以带标签实现与<code>goto</code>语句相似的功能。尽管，<code>goto</code>作为JAVA的保留字被给与了足够的尊重，因为JAVA的设计者认为对<code>goto</code>语句的合理使用是有益的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">here:</span><br><span class="line"><span class="keyword">while</span>(……) &#123;</span><br><span class="line">    ……</span><br><span class="line">    <span class="keyword">break</span> here; <span class="comment">// 将跳转到here语句块的末尾</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// break到这里</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>JAVA中有和C/C++一样用法的<code>switch...case...</code>语句，注意两点，一是如果<code>case</code>子句末尾没有添加<code>break;</code>则将继续执行下一个<code>case</code>子句；二是<code>case</code>子句只能对整数或枚举类常量进行判断。</p>
+</li>
+<li><p>大数值计算<br>&emsp;&emsp; 使用<code>BigInteger</code>类实现任意精度s的整数计算，使用<code>BigDecimal</code>类实现任意精度的浮点数计算。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">BigInteger a = BigInteger.valueof(<span class="number">100</span>);     <span class="comment">// 从int型常量创建BigInteger实例</span></span><br><span class="line">a.add(BigInteger.valueOf(<span class="number">1</span>));   <span class="comment">// 大数值做加法必须调用add方法，参数也必须是大数值类型</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>JAVA没有提供运算符重载功能。JAVA语言的设计者为字符串类<code>String</code>重载了<code>+</code>连接运算符，但是JAVA不允许程序员自己定义重载运算符。</p>
+</li>
+<li><p><code>for each</code>语句中，被遍历的集合必须是数组或者实现了<code>Iterable</code>对象的类对象。对于二维数组的遍历需要使用嵌套的<code>for each</code>。</p>
+</li>
+<li><p>JAVA中没有指针运算，不能通过数组名来存取数组元素。JAVA为数值型数组提供了优化的快速排序方法：<code>Arrays.sort(array)</code>（默认升序排列）。在创建数组时不一定要使用<code>new</code>：<code>int[] arr = {1, 2, 3};</code>。数组的长度可以为0，但是这不代表它是<code>null</code>。JAVA数组最特别的一点是它支持不规则数组，</p>
+</li>
+</ol>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>TSheng</span>
+                    </p>
+                
+                
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Keep <strong>CALM<strong>, keep <strong>GOING<strong>!</strong></strong></strong></strong></span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/JAVA/"># JAVA</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2019/10/01/p5/">p5</a>
+            
+            
+            <a class="next" rel="next" href="/2019/09/20/JAVA-questions/">JAVA学习中的疑问与解答</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© TSheng | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>
