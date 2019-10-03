@@ -238,9 +238,12 @@
 </li>
 </ol>
 <h1 id="对象与类"><a href="#对象与类" class="headerlink" title="对象与类"></a>对象与类</h1><ol>
-<li><p>JAVA在定义类的方法时，应避免将返回值设为实例对象变量的引用：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Xxx</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Yyy a;</span><br><span class="line">    ……</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Yyy <span class="title">getA</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a;   <span class="comment">// 避免此种方法定义，因为外部程序可以通过返回的这个对象引用，随意改变本来不应该被改变的，受private保护的a</span></span><br><span class="line">        <span class="keyword">return</span> (Yyy) a.clone(); <span class="comment">// 应该使用此种形式，返回一个拷贝后的内存单元的引用，这样保证数据安全性又可以向外界传递必要的信息</span></span><br><span class="line">    &#125;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li>JAVA在定义类的方法时，应避免将返回值设为实例对象变量的引用：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Xxx</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Yyy a;</span><br><span class="line">    ……</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Yyy <span class="title">getA</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a;   <span class="comment">// 避免此种方法定义，因为外部程序可以通过返回的这个对象引用，随意改变本来不应该被改变的，受private保护的a</span></span><br><span class="line">        <span class="keyword">return</span> (Yyy) a.clone(); <span class="comment">// 应该使用此种形式，返回一个拷贝后的内存单元的引用，这样保证数据安全性又可以向外界传递必要的信息</span></span><br><span class="line">    &#125;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 </li>
+</ol>
+<p>&emsp;需要注意的是JAVA使用的是浅拷贝，对于调用<code>clone()</code>方法的情况，如果对象中的某个实例变量是其他对象的引用，则默认拷贝的是这个引用，自然也可以通过拷贝后的这个引用来修改相应的对象。为实现深拷贝，需要类实现<code>Cloneable()</code>接口并重载<code>clone</code>方法（用例参见P230.例6-2）。</p>
+<ol start="2">
 <li><p>JAVA中一般将方法设计为公有的，以方便外部类调用。从设计的角度来说，公有方法不能随意删除，因为可能导致其他程序不可用。反之，如果一个方法被设置成私有的，那么它一定不会被外部类所使用，因此在保证内部类正确的前提下将其删除是不会带来外部问题的。JAVA类中的方法的参数除了参数列表中显式给出的参数以外，还包含<code>this</code>隐式参数；但是对于一个静态方法，不存在这样的隐式参数，因此静态方法无法访问和使用实例域中的变量数据，但是静态方法可以访问静态域（类域）中的变量数据。</p>
 </li>
 <li><p>JAVA中函数调用始终是按值传递的，即，参数传入函数后，先在内存中将参数拷贝一份，再使用这个拷贝参与方法中的运算，在函数结束后，原参数所引用的内存单元不会发生变化。需要注意的是，尽管这个描述对于主数据类型的引用传递和类对象的引用传递是一致符合的，但是实际理解起来还是又略微的不同。具体来说就是，对于一个主数据类型的引用在引用结束后数据不会发生改变。当传递的是对象的引用时，在函数内部拷贝的不是对象而是这个引用本身，也即拷贝引用和原引用同时指向这个对象，此时是可以通过这个拷贝引用来改变原对象的内存单元内容的。此外，如果在函数内部企图改变传入对象的引用，使其引用一块新的内存单元，也将遭遇失败。理由同样，因为在函数内部是对引用的拷贝进行操作，所以上述的操作只会让拷贝引用指向一个新的内存单元，而原引用不会受到任何影响，并且当函数结束后，由于拷贝引用生命周期结束，拷贝引用所引用的新的内存单元也将被JAVA垃圾回收器回收，不留下任何痕迹。</p>
@@ -253,8 +256,21 @@
 </li>
 <li><p>JAVA不支持多继承。子类在覆盖父类的方法时，子类方法的可见性不能低于父类；于是，当父类方法可见性为<code>public</code>时，子类方法的可见性只能是<code>public</code>。</p>
 </li>
-<li><p>JAVA支持强制类型转换，但是最好在转换之前查看一下是否合法：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(objectA <span class="keyword">instanceof</span> ClassB) &#123;</span><br><span class="line">    objectB = (ClassB) objectA;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>JAVA支持强制类型转换，但建议尽量少用，且最好在转换之前查看一下是否合法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(objectA <span class="keyword">instanceof</span> ClassB) &#123;</span><br><span class="line">    objectB = (ClassB) objectA;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>从抽象类中继承得到子类，如果子类中实现抽象类中所有的方法，则子类是个具体类，否则子类也需要标记为抽象类。</p>
+</li>
+<li><p>JAVA支持参数数目可变的方法声明。下面是一个求最大数的方法它允许输入若干参数。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">maxNumber</span><span class="params">(<span class="keyword">double</span>...numList)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">double</span> maxElem = numList[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">double</span> elem : numList) &#123;</span><br><span class="line">        maxElem = elem &gt; maxElem ? elem : maxElem;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> maxElem;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 调用</span></span><br><span class="line">maxNumber(<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>);</span><br><span class="line">maxNumber(<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>, <span class="number">4.0</span>);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h1 id="接口与内部类"><a href="#接口与内部类" class="headerlink" title="接口与内部类"></a>接口与内部类</h1><ol>
+<li><p>在接口中声明方法时不必提供访问控 制关键字，接口所有方法自动属于<code>public</code>，但在实现接口的时候要提供<code>public</code>声明 。接口中不能含有实例域，不能在接口内实现方法。</p>
+</li>
+<li><p>接口和接口变量</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 可以用接口声明一个变量</span></span><br><span class="line">Comparable x;</span><br><span class="line"><span class="comment">// 不可以用new实例化一个接口</span></span><br><span class="line">Comparable x = <span class="keyword">new</span> Comparable();    <span class="comment">// Error!</span></span><br><span class="line"><span class="comment">// 可以用一个实现了Comparable接口的类来初始化Comparable接口变量</span></span><br><span class="line">Comparable x = <span class="keyword">new</span> Salary();    <span class="comment">// Salary extends Comparable</span></span><br></pre></td></tr></table></figure></li>
 </ol>
 
         </div>
