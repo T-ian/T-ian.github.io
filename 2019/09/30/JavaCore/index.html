@@ -237,6 +237,25 @@
 <li><p>JAVA中没有指针运算，不能通过数组名来存取数组元素。JAVA为数值型数组提供了优化的快速排序方法：<code>Arrays.sort(array)</code>（默认升序排列）。在创建数组时不一定要使用<code>new</code>：<code>int[] arr = {1, 2, 3};</code>。数组的长度可以为0，但是这不代表它是<code>null</code>。JAVA数组最特别的一点是它支持不规则数组，</p>
 </li>
 </ol>
+<h1 id="对象与类"><a href="#对象与类" class="headerlink" title="对象与类"></a>对象与类</h1><ol>
+<li><p>JAVA在定义类的方法时，应避免将返回值设为实例对象变量的引用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Xxx</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Yyy a;</span><br><span class="line">    ……</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Yyy <span class="title">getA</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a;   <span class="comment">// 避免此种方法定义，因为外部程序可以通过返回的这个对象引用，随意改变本来不应该被改变的，受private保护的a</span></span><br><span class="line">        <span class="keyword">return</span> (Yyy) a.clone(); <span class="comment">// 应该使用此种形式，返回一个拷贝后的内存单元的引用，这样保证数据安全性又可以向外界传递必要的信息</span></span><br><span class="line">    &#125;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>JAVA中一般将方法设计为公有的，以方便外部类调用。从设计的角度来说，公有方法不能随意删除，因为可能导致其他程序不可用。反之，如果一个方法被设置成私有的，那么它一定不会被外部类所使用，因此在保证内部类正确的前提下将其删除是不会带来外部问题的。JAVA类中的方法的参数除了参数列表中显式给出的参数以外，还包含<code>this</code>隐式参数；但是对于一个静态方法，不存在这样的隐式参数，因此静态方法无法访问和使用实例域中的变量数据，但是静态方法可以访问静态域（类域）中的变量数据。</p>
+</li>
+<li><p>JAVA中函数调用始终是按值传递的，即，参数传入函数后，先在内存中将参数拷贝一份，再使用这个拷贝参与方法中的运算，在函数结束后，原参数所引用的内存单元不会发生变化。需要注意的是，尽管这个描述对于主数据类型的引用传递和类对象的引用传递是一致符合的，但是实际理解起来还是又略微的不同。具体来说就是，对于一个主数据类型的引用在引用结束后数据不会发生改变。当传递的是对象的引用时，在函数内部拷贝的不是对象而是这个引用本身，也即拷贝引用和原引用同时指向这个对象，此时是可以通过这个拷贝引用来改变原对象的内存单元内容的。此外，如果在函数内部企图改变传入对象的引用，使其引用一块新的内存单元，也将遭遇失败。理由同样，因为在函数内部是对引用的拷贝进行操作，所以上述的操作只会让拷贝引用指向一个新的内存单元，而原引用不会受到任何影响，并且当函数结束后，由于拷贝引用生命周期结束，拷贝引用所引用的新的内存单元也将被JAVA垃圾回收器回收，不留下任何痕迹。</p>
+</li>
+<li><p>JAVA允许在构造器内部调用其他构造器，这是C++所不允许的。在JAVA中通过<code>this()</code>，括号中填入相应的参数，就能调用相应的构造函数。JAVA调用构造器的先后顺序为：<br>&emsp;* 将所有数据域用默认初始值初始化；<br>&emsp;* 按照出现次序依次执行域初始化语句和初始化块；<br>&emsp;* 调用构造函数（允许构造函数内调用构造函数）。</p>
+</li>
+</ol>
+<h1 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h1><ol>
+<li><p><code>super</code>并不是对象的引用，它只是一个特殊的关键字，并不能将<code>super</code>赋值给另外的变量引用。</p>
+</li>
+<li><p>JAVA不支持多继承。子类在覆盖父类的方法时，子类方法的可见性不能低于父类；于是，当父类方法可见性为<code>public</code>时，子类方法的可见性只能是<code>public</code>。</p>
+</li>
+<li><p>JAVA支持强制类型转换，但是最好在转换之前查看一下是否合法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(objectA <span class="keyword">instanceof</span> ClassB) &#123;</span><br><span class="line">    objectB = (ClassB) objectA;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
 
         </div>
 
@@ -278,7 +297,7 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2019/10/01/p5/">p5</a>
+                <a class="prev" rel="prev" href="/2019/10/01/p5/">最长回文子串</a>
             
             
             <a class="next" rel="next" href="/2019/09/20/JAVA-questions/">JAVA学习中的疑问与解答</a>
