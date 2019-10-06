@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+
+<title>8.字符串转整数 | T-ian</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Home</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Home</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">8.字符串转整数</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">TSheng</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">十月 6, 2019&nbsp;&nbsp;15:02:15</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="我的思路"><a href="#我的思路" class="headerlink" title="我的思路"></a>我的思路</h1><p>这个题目没有涉及到什么算法，就是对很多边界情况的讨论比较麻烦，需要考虑很多种可能。多WA几次，看没过的样例就知道怎么修正了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">myAtoi</span><span class="params">(String str)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(str.equals(<span class="string">""</span>)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;                           <span class="comment">// 1.空字符串返回0</span></span><br><span class="line">        String resultStr = <span class="string">""</span>;</span><br><span class="line">        <span class="keyword">boolean</span> first = <span class="keyword">true</span>, begin = <span class="keyword">false</span>, blank = <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">char</span> letter : str.toCharArray()) &#123;</span><br><span class="line">            <span class="keyword">if</span>(first) &#123;</span><br><span class="line">                <span class="keyword">if</span>(letter == <span class="string">' '</span>) &#123; </span><br><span class="line">                    blank = <span class="keyword">true</span>;</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                &#125;   </span><br><span class="line">                <span class="keyword">if</span>(letter == <span class="string">'+'</span> || letter == <span class="string">'-'</span> || (letter &gt;= <span class="string">'0'</span> &amp;&amp; letter &lt;= <span class="string">'9'</span>)) &#123;</span><br><span class="line">                    resultStr += letter;</span><br><span class="line">                    first = <span class="keyword">false</span>;</span><br><span class="line">                    begin = <span class="keyword">true</span>;</span><br><span class="line">                    blank = <span class="keyword">false</span>;</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;   <span class="comment">// 2.首个字符串无法转换则直接返回0</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(begin) &#123;</span><br><span class="line">                <span class="keyword">if</span>(letter &gt;= <span class="string">'0'</span> &amp;&amp; letter &lt;= <span class="string">'9'</span>) &#123;</span><br><span class="line">                    resultStr += letter;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(blank || resultStr.equals(<span class="string">"+"</span>) || resultStr.equals(<span class="string">"-"</span>))&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;      <span class="comment">// 3.空白字符串和只有符号字符的字符串，直接返回0</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(resultStr.length() &gt; <span class="number">11</span>) &#123;   <span class="comment">// 4.长度超过long的取值范围，另外讨论</span></span><br><span class="line">            <span class="keyword">int</span> beginIndex = <span class="number">0</span>;</span><br><span class="line">            String strProcessed = <span class="string">""</span>;</span><br><span class="line">            <span class="keyword">if</span>(resultStr.charAt(<span class="number">0</span>) == <span class="string">'-'</span> || resultStr.charAt(<span class="number">0</span>) == <span class="string">'+'</span>) &#123;</span><br><span class="line">                strProcessed += resultStr.charAt(<span class="number">0</span>);</span><br><span class="line">                beginIndex = <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">while</span>(resultStr.charAt(beginIndex++) == <span class="string">'0'</span> &amp;&amp; beginIndex &lt; resultStr.length());</span><br><span class="line">            strProcessed += resultStr.substring(beginIndex - <span class="number">1</span>, resultStr.length());</span><br><span class="line">            resultStr = strProcessed;</span><br><span class="line">                                        <span class="comment">// 4.1 处理“-00000000000000000123”这类可能，将其转化为“-123”</span></span><br><span class="line">            <span class="keyword">if</span>(resultStr.charAt(<span class="number">0</span>) == <span class="string">'-'</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> Integer.MIN_VALUE;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> Integer.MAX_VALUE;</span><br><span class="line">            &#125;</span><br><span class="line">                                        <span class="comment">// 4.2 若处理后仍然超出long取值范围，则按符号不同返回最大最小值</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">long</span> result = Long.parseLong(resultStr);</span><br><span class="line">        <span class="keyword">return</span> (<span class="keyword">int</span>) (result &gt; Integer.MAX_VALUE ? Integer.MAX_VALUE : (result &lt; Integer.MIN_VALUE ? Integer.MIN_VALUE : (result)));    <span class="comment">// 5.long范围内，直接比较按情况返回即可</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>TSheng</span>
+                    </p>
+                
+                
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Keep <strong>CALM<strong>, keep <strong>GOING<strong>!</strong></strong></strong></strong></span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/LeetCode/"># LeetCode</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2019/10/05/p6/">Z字形变换</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© TSheng | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>
