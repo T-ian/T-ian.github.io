@@ -7,7 +7,7 @@
 
 
 
-<title>9.回文数 | T-ian</title>
+<title>p10 | T-ian</title>
 
 
 
@@ -165,7 +165,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">9.回文数</h1>
+            <h1 class="post-title">p10</h1>
             
                 <div class="post-meta">
                     
@@ -174,7 +174,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">十月 6, 2019&nbsp;&nbsp;20:55:06</a>
+                        Date: <a href="#">十月 7, 2019&nbsp;&nbsp;22:16:26</a>
                         </span>
                     
                     
@@ -183,20 +183,16 @@
         </header>
 
         <div class="post-content">
-            <h1 id="我的思路"><a href="#我的思路" class="headerlink" title="我的思路"></a>我的思路</h1><ol>
-<li><p>转字符串比较：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isPalindrome</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        StringBuffer xStr = <span class="keyword">new</span> StringBuffer(Integer.valueOf(x).toString());</span><br><span class="line">        String tempStr = xStr.toString();</span><br><span class="line">        <span class="keyword">if</span>(tempStr.equals(xStr.reverse().toString())) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>除数分解逆置整数：<br>&emsp;这里唯一需要考虑的就是溢出问题，但是很容易证明，回文数一定不溢出。所以在中间位置加上一个溢出判断即可。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isPalindrome</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (x &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> xReverse = <span class="number">0</span>, xTemp = x;</span><br><span class="line">        <span class="keyword">while</span> (xTemp != <span class="number">0</span>) &#123;   </span><br><span class="line">            <span class="keyword">if</span>(xReverse &gt; Integer.MAX_VALUE / <span class="number">10</span> || xReverse &lt; Integer.MIN_VALUE / <span class="number">10</span>) &#123;    <span class="comment">// 不借助long进行溢出判断的方法</span></span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            xReverse = xReverse * <span class="number">10</span> + xTemp % <span class="number">10</span>;</span><br><span class="line">            xTemp /= <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(xReverse == x) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
+            <h1 id="代码思路"><a href="#代码思路" class="headerlink" title="代码思路"></a>代码思路</h1><ol>
+<li>递归。<br>总体思想就是，从最左侧开始逐个字符比较，每一次在函数体内处理一位字符，然后将剩余的子字符串传入递归函数。在这之中需要处理两个字符，先来看’<em>‘字符。<br>‘</em>‘字符的作用就是，可以对它前面一个字符进行扩展或者消除前面这个字符。这里分四种情况进行讨论：</li>
 </ol>
-<h1 id="逆置一半的思路"><a href="#逆置一半的思路" class="headerlink" title="逆置一半的思路"></a>逆置一半的思路</h1><p>对于一个回文数，因为它的左半边等于右半边，所以只需要逆置左半边和右半边对比即可。也即在上面第二种解法中，不需要循环到底，只需要循环一半。这里有个有趣的问题就是，给定一个int型整数，如何确定它的位数。一种思路是：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> digit = (<span class="keyword">int</span>) (Math.log(x) / Math.log(<span class="number">10</span>) + <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
-
-<p>JAVA静态方法<code>Math.log()</code>是以自然对数为底的对数运算，通过一个除法可以将其转变为以10为底的对数。对于一个整数，以10为底作对数运算再截断小数部分得到的整数刚好等于它的位数-1。</p>
-
+<ul>
+<li>当当前字符不等，且模式串p的下一个字符是’*’号时：<br>对于这种情况，只有一个办法，就是用后面这个星号消掉当前这个不匹配的字符，然后将模式串星号后面的子串传入递归函数，进行下一层次的比较。</li>
+<li>当当前字符相等，且模式串p的下一字符是’*’号时：<br>对于这种情况，也有两种情况讨论，一是仍然用后面的星号消掉当前字符，二是利用后面的星号对当前的字符进行扩展。这样就能充分照顾所有的可能性。在使用星号进行扩展时需要考虑函数的递归特点，因为不知道需要扩展多少次，所以在将模式子串传入下一级时要保证这个子串在这个位置依然可以进行扩展，也就是说，在当前层级最多只进行一次扩展，然后把星号原封不动的传下去，这样下一层及会根据自己需要决定是不扩展了还是继续递归的扩展。所以这里扩展的方法是，模式子串不变，而把主串的当前字符剔除，剩余字符串作为主串参与递归，相当于经过一次扩展后，从主串和模式串上同时去除一位。</li>
+<li>当前字符不等，且模式串下一个字符不是’*’号时：<br>这种情况必然是匹配失败，直接返回false。</li>
+<li>当前字符相等，且模式串下一个字符不是’*’号时：<br>同时从模式串和主串中剔除当前字符，然后将剩下的主串和模式串传入下一级递归函数。这是最简单的一种递归可能。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isMatch</span><span class="params">(String s, String p)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (s.equals(p)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (p.isEmpty()) &#123;</span><br><span class="line">            <span class="keyword">return</span> s.isEmpty();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">boolean</span> firstEqual = !s.isEmpty() &amp;&amp; (p.charAt(<span class="number">0</span>) == s.charAt(<span class="number">0</span>) || p.charAt(<span class="number">0</span>) == <span class="string">'.'</span>);</span><br><span class="line">        <span class="keyword">if</span> (p.length() &gt;= <span class="number">2</span> &amp;&amp; p.charAt(<span class="number">1</span>) == <span class="string">'*'</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> isMatch(s, p.substring(<span class="number">2</span>)) || (firstEqual &amp;&amp; isMatch(s.substring(<span class="number">1</span>), p));</span><br><span class="line">            <span class="comment">// 这里使用firstEqual做并运算来区分上面的第一二种情况，前者不做并运算的原因是，既然都要消掉它了，那么相等与否也不重要了</span></span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (firstEqual) &#123;</span><br><span class="line">            <span class="keyword">return</span> isMatch(s.substring(<span class="number">1</span>), p.substring(<span class="number">1</span>));</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
         </div>
 
         
@@ -237,10 +233,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2019/10/07/动态规划/">《算法导论》——动态规划</a>
             
-            
-            <a class="next" rel="next" href="/2019/10/06/p8/">8.字符串转整数</a>
+            <a class="next" rel="next" href="/2019/10/07/动态规划/">《算法导论》——动态规划</a>
             
         </section>
 
