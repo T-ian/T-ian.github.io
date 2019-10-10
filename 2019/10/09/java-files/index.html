@@ -7,7 +7,7 @@
 
 
 
-<title>《算法导论》——动态规划 | T-ian</title>
+<title>JAVA流与文件 | T-ian</title>
 
 
 
@@ -165,7 +165,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">《算法导论》——动态规划</h1>
+            <h1 class="post-title">JAVA流与文件</h1>
             
                 <div class="post-meta">
                     
@@ -174,7 +174,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">十月 7, 2019&nbsp;&nbsp;13:41:28</a>
+                        Date: <a href="#">十月 9, 2019&nbsp;&nbsp;09:03:16</a>
                         </span>
                     
                     
@@ -183,18 +183,30 @@
         </header>
 
         <div class="post-content">
-            <h1 id="钢条切割问题"><a href="#钢条切割问题" class="headerlink" title="钢条切割问题"></a>钢条切割问题</h1><h2 id="为什么长为n的钢条有2n-1种切割方法？"><a href="#为什么长为n的钢条有2n-1种切割方法？" class="headerlink" title="为什么长为n的钢条有2n-1种切割方法？"></a>为什么长为n的钢条有2<sup>n-1</sup>种切割方法？</h2><p>&emsp;对于一个长为n的钢条，我们从最左侧开始进行切割。以最左侧为左边原点，单位长度为1，向右建立坐标轴，则可以切割的点为i=1，2，3，……，n-1。对于坐标轴上的任意点i，在所有的切割可能性中它只有两种可能的状态：被切割了（记作1），没有被切割（记作0）。<br>&emsp;则当i=1时，整个钢条只有两种可能：0或1，分别对应长度组合（0，n）和（1，n-1）。当i=2时，钢条有四种可能状态：00，01，10，11，对应长度组合为（n，0），（2，n-2），（1，n-1），（1，1，n-2）。当i=3，4，……，n-1依次类推，最后得到的可能组合从00……0（n-1个0）到11……1（n-1个1），通过二进制和十进制的转化关系可以知道，总共有2<sup>n-1</sup>种可能。</p>
-<h2 id="为什么可以将问题的最优解转化为子问题的最优解？"><a href="#为什么可以将问题的最优解转化为子问题的最优解？" class="headerlink" title="为什么可以将问题的最优解转化为子问题的最优解？"></a>为什么可以将问题的最优解转化为子问题的最优解？</h2><p>&emsp;使用反证法来解释这个问题。对于钢条，从任意点i处切割成两段，两段最优切割收益分别为r<sub>i</sub>和r<sub>n-i</sub>。令钢条的最优切割收益r<sub>n</sub>=Max(r<sub>i</sub>+r<sub>n-i</sub>)，i=1…n，假设存在一种切割方案α取得钢条最优切割收益r<sub>n,α</sub>，且有r<sub>n,α</sub>&gt;r<sub>n</sub>。<br>&emsp;证明：<br>&emsp;&emsp;对于切割方案α，假设将钢条共切成k段，长度分别为i<sub>1</sub>…i<sub>k</sub>，对应每段收益为p<sub>i<sub>1</sub></sub>…p<sub>i<sub>k</sub></sub>，则有：</p>
-<div align="center">r<sub>n,α</sub> = Σ i<sub>j</sub>*p<sub>i<sub>j</sub></sub>，j=1...k</div>
-&emsp;&emsp;则有：
-<div align="center">r<sub>n,α</sub> = Σ i<sub>j1</sub>*p<sub>i<sub>j1</sub></sub>，(j1=1...m) + 
-Σ i<sub>j2</sub>*p<sub>i<sub>j2</sub></sub>，(j2=m+1...k)</div>
-&emsp;&emsp;假设（1，m）和（m+1，k）两个子段对应的最优切割收益分别为r<sub>1,m</sub>和r<sub>m+1,k</sub>，则必有：
-<div align="center">Σ i<sub>j1</sub>*p<sub>i<sub>j1</sub></sub> ≤ r<sub>1,m</sub>，Σ i<sub>j2</sub>*p<sub>i<sub>j2</sub></sub> ≤ r<sub>m+1,k</sub>，且</div>
-<div align="center">r<sub>1,m</sub> + r<sub>m+1,k</sub> ≤ Max(r<sub>i</sub>+r<sub>n-i</sub>) = r<sub>n</sub></div>
-&emsp;&emsp;即：
-<div align="center">r<sub>n,α</sub> ≤ r<sub>1,m</sub> + r<sub>m+1,k</sub> ≤ r<sub>n</sub></div>
-&emsp;&emsp;与假设矛盾，原命题得证。
+            <h1 id="常用io类的继承结构"><a href="#常用io类的继承结构" class="headerlink" title="常用io类的继承结构"></a>常用io类的继承结构</h1><h2 id="Reader类"><a href="#Reader类" class="headerlink" title="Reader类"></a>Reader类</h2><p>&emsp;<code>Reader</code>类是用于读取字符流的抽象类。其子类必须实现<code>read()</code>和<code>close()</code>方法，常用子类如下：</p>
+<ol>
+<li><code>BufferedReader</code>类</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">java.lang.Object</span><br><span class="line">    | java.io.Reader</span><br><span class="line">        | java.io.BufferedReader</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;<code>BufferedReader</code>类通过一个缓冲区从字符流中读取字符，以实现较高的读写效率。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// -- 构造方法 --</span></span><br><span class="line">BufferedReader(Read in);    <span class="comment">// 用read类对象创建一个缓冲字符输入流</span></span><br><span class="line">BufferedReader(Read in, <span class="keyword">int</span> sz); <span class="comment">// 指定缓冲区大小</span></span><br><span class="line"><span class="comment">// -- 常用方法 --</span></span><br><span class="line">close(); <span class="comment">// 关闭流</span></span><br><span class="line">read(); <span class="comment">// 读取单个字符</span></span><br><span class="line">readLine(); <span class="comment">//读取一行字符</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><code>InputStreamReader</code>类</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">java.lang.Object</span><br><span class="line">    | java.io.Reader</span><br><span class="line">        | java.io.InputStreamReader</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;<code>InputStreamReader</code>类是字节流通向字符流的桥梁。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// -- 构造方法 --</span></span><br><span class="line">InputStreamReader(InputStream in);  <span class="comment">//  创建一个使用默认字符集的InputStreamReader</span></span><br><span class="line"><span class="comment">// -- 常用方法 --</span></span><br><span class="line">close(); </span><br><span class="line">read(); <span class="comment">// 读取单个字符</span></span><br></pre></td></tr></table></figure>
+
+<p>&emsp;InputStream的继承结构为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">java.lang.Object</span><br><span class="line">    | java.io.InputStream</span><br></pre></td></tr></table></figure>
+
+<h1 id="使用BufferedWriter向文件中写入数据"><a href="#使用BufferedWriter向文件中写入数据" class="headerlink" title="使用BufferedWriter向文件中写入数据"></a>使用BufferedWriter向文件中写入数据</h1><p>&emsp;<code>BufferedWrite</code>和<code>BufferedReader</code>利用缓冲对字符流进行处理，效率比对字节处理的<code>OutputStreamWriter</code>和<code>InputStreamReader</code>要高。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">BufferedWriter bwWriter = <span class="keyword">new</span> BufferedWriter(<span class="keyword">new</span> OutputStreamWriter(<span class="keyword">new</span> FileOutputStream(<span class="string">"in.txt"</span>)));</span><br><span class="line"><span class="comment">// </span></span><br><span class="line">bwWriter.write(<span class="string">"tests"</span>);</span><br><span class="line">bwWriter.flush();</span><br><span class="line">bwWriter.close();</span><br></pre></td></tr></table></figure>
+
+
         </div>
 
         
@@ -222,7 +234,7 @@
                 <span class="tag">
                     
                     
-                        <a href="/tags/算法/"># 算法</a>
+                        <a href="/tags/JAVA/"># JAVA</a>
                     
                         
                 </span>
@@ -235,10 +247,10 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2019/10/07/p10/">10.正则表达式</a>
+                <a class="prev" rel="prev" href="/2019/10/10/p11/">11.盛最多水的容器</a>
             
             
-            <a class="next" rel="next" href="/2019/10/06/p9/">9.回文数</a>
+            <a class="next" rel="next" href="/2019/10/07/p10/">10.正则表达式</a>
             
         </section>
 

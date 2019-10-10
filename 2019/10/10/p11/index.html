@@ -7,7 +7,7 @@
 
 
 
-<title>《算法导论》——动态规划 | T-ian</title>
+<title>11.盛最多水的容器 | T-ian</title>
 
 
 
@@ -165,7 +165,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">《算法导论》——动态规划</h1>
+            <h1 class="post-title">11.盛最多水的容器</h1>
             
                 <div class="post-meta">
                     
@@ -174,7 +174,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">十月 7, 2019&nbsp;&nbsp;13:41:28</a>
+                        Date: <a href="#">十月 10, 2019&nbsp;&nbsp;22:20:11</a>
                         </span>
                     
                     
@@ -183,18 +183,11 @@
         </header>
 
         <div class="post-content">
-            <h1 id="钢条切割问题"><a href="#钢条切割问题" class="headerlink" title="钢条切割问题"></a>钢条切割问题</h1><h2 id="为什么长为n的钢条有2n-1种切割方法？"><a href="#为什么长为n的钢条有2n-1种切割方法？" class="headerlink" title="为什么长为n的钢条有2n-1种切割方法？"></a>为什么长为n的钢条有2<sup>n-1</sup>种切割方法？</h2><p>&emsp;对于一个长为n的钢条，我们从最左侧开始进行切割。以最左侧为左边原点，单位长度为1，向右建立坐标轴，则可以切割的点为i=1，2，3，……，n-1。对于坐标轴上的任意点i，在所有的切割可能性中它只有两种可能的状态：被切割了（记作1），没有被切割（记作0）。<br>&emsp;则当i=1时，整个钢条只有两种可能：0或1，分别对应长度组合（0，n）和（1，n-1）。当i=2时，钢条有四种可能状态：00，01，10，11，对应长度组合为（n，0），（2，n-2），（1，n-1），（1，1，n-2）。当i=3，4，……，n-1依次类推，最后得到的可能组合从00……0（n-1个0）到11……1（n-1个1），通过二进制和十进制的转化关系可以知道，总共有2<sup>n-1</sup>种可能。</p>
-<h2 id="为什么可以将问题的最优解转化为子问题的最优解？"><a href="#为什么可以将问题的最优解转化为子问题的最优解？" class="headerlink" title="为什么可以将问题的最优解转化为子问题的最优解？"></a>为什么可以将问题的最优解转化为子问题的最优解？</h2><p>&emsp;使用反证法来解释这个问题。对于钢条，从任意点i处切割成两段，两段最优切割收益分别为r<sub>i</sub>和r<sub>n-i</sub>。令钢条的最优切割收益r<sub>n</sub>=Max(r<sub>i</sub>+r<sub>n-i</sub>)，i=1…n，假设存在一种切割方案α取得钢条最优切割收益r<sub>n,α</sub>，且有r<sub>n,α</sub>&gt;r<sub>n</sub>。<br>&emsp;证明：<br>&emsp;&emsp;对于切割方案α，假设将钢条共切成k段，长度分别为i<sub>1</sub>…i<sub>k</sub>，对应每段收益为p<sub>i<sub>1</sub></sub>…p<sub>i<sub>k</sub></sub>，则有：</p>
-<div align="center">r<sub>n,α</sub> = Σ i<sub>j</sub>*p<sub>i<sub>j</sub></sub>，j=1...k</div>
-&emsp;&emsp;则有：
-<div align="center">r<sub>n,α</sub> = Σ i<sub>j1</sub>*p<sub>i<sub>j1</sub></sub>，(j1=1...m) + 
-Σ i<sub>j2</sub>*p<sub>i<sub>j2</sub></sub>，(j2=m+1...k)</div>
-&emsp;&emsp;假设（1，m）和（m+1，k）两个子段对应的最优切割收益分别为r<sub>1,m</sub>和r<sub>m+1,k</sub>，则必有：
-<div align="center">Σ i<sub>j1</sub>*p<sub>i<sub>j1</sub></sub> ≤ r<sub>1,m</sub>，Σ i<sub>j2</sub>*p<sub>i<sub>j2</sub></sub> ≤ r<sub>m+1,k</sub>，且</div>
-<div align="center">r<sub>1,m</sub> + r<sub>m+1,k</sub> ≤ Max(r<sub>i</sub>+r<sub>n-i</sub>) = r<sub>n</sub></div>
-&emsp;&emsp;即：
-<div align="center">r<sub>n,α</sub> ≤ r<sub>1,m</sub> + r<sub>m+1,k</sub> ≤ r<sub>n</sub></div>
-&emsp;&emsp;与假设矛盾，原命题得证。
+            <h1 id="我的思路："><a href="#我的思路：" class="headerlink" title="我的思路："></a>我的思路：</h1><p>两层循环，暴力破解。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxArea</span><span class="params">(<span class="keyword">int</span>[] height)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> max = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; height.length; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i; j &lt; height.length; j++) &#123;</span><br><span class="line">                max = Math.max((j - i) * Math.min(height[i], height[j]), max);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> max;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><p>双指针法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxArea</span><span class="params">(<span class="keyword">int</span>[] height)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> max = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>, j = height.length - <span class="number">1</span>; i &lt; j;) &#123;</span><br><span class="line">            max = Math.max((j - i) * Math.min(height[i], height[j]), max);</span><br><span class="line">            <span class="keyword">if</span> (height[i] &gt; height[j]) &#123;</span><br><span class="line">                j--;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> max;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
         </div>
 
         
@@ -222,7 +215,7 @@
                 <span class="tag">
                     
                     
-                        <a href="/tags/算法/"># 算法</a>
+                        <a href="/tags/LeetCode/"># LeetCode</a>
                     
                         
                 </span>
@@ -235,10 +228,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2019/10/07/p10/">10.正则表达式</a>
             
-            
-            <a class="next" rel="next" href="/2019/10/06/p9/">9.回文数</a>
+            <a class="next" rel="next" href="/2019/10/09/java-files/">JAVA流与文件</a>
             
         </section>
 
