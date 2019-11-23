@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+
+<title>JavaExam | T-ian</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Home</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Home</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">JavaExam</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">TSheng</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">十一月 22, 2019&nbsp;&nbsp;18:09:44</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="1-JAVA中的switch…case…语句支持多种数据类型"><a href="#1-JAVA中的switch…case…语句支持多种数据类型" class="headerlink" title="1.JAVA中的switch…case…语句支持多种数据类型"></a>1.JAVA中的switch…case…语句支持多种数据类型</h1><p>C++/C中的switch…case…只支持整型变量的判断，JAVA中支持String和其他多种基本类型和其包装类（不含long和boolean）</p>
+<h1 id="2-一个类只能继承自一个类，但是可以实现多个接口"><a href="#2-一个类只能继承自一个类，但是可以实现多个接口" class="headerlink" title="2.一个类只能继承自一个类，但是可以实现多个接口"></a>2.一个类只能继承自一个类，但是可以实现多个接口</h1><h1 id="3-JAVA重载"><a href="#3-JAVA重载" class="headerlink" title="3.JAVA重载"></a>3.JAVA重载</h1><ol>
+<li>返回类型不做要求；</li>
+<li>参数的数量不同；类型不同；次序不同</li>
+</ol>
+<h1 id="4-Parameters和Arguments的区别"><a href="#4-Parameters和Arguments的区别" class="headerlink" title="4.Parameters和Arguments的区别"></a>4.Parameters和Arguments的区别</h1><ol>
+<li>Parameters为形参，在函数定义的时候出现；</li>
+<li>Arguments为实参，在调用函数的时候填入；</li>
+</ol>
+<h1 id="5-JAVA不允许在函数调用的时候传入一个函数"><a href="#5-JAVA不允许在函数调用的时候传入一个函数" class="headerlink" title="5.JAVA不允许在函数调用的时候传入一个函数"></a>5.JAVA不允许在函数调用的时候传入一个函数</h1><p>可以通过传入一个类，在函数内使用这个类的方法来实现这个功能</p>
+<h1 id="6-可变参数列表"><a href="#6-可变参数列表" class="headerlink" title="6.可变参数列表"></a>6.可变参数列表</h1><p>JAVA允许定义一个参数数目可变的函数：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getNum</span><span class="params">(Parent... parents)</span> </span>&#123; <span class="comment">// parents是一个Parent数组：Parent[] parent = new Parent[Num];</span></span><br><span class="line">    <span class="keyword">return</span> parents.length;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="7-参数传递"><a href="#7-参数传递" class="headerlink" title="7.参数传递"></a>7.参数传递</h1><ol>
+<li>对于主数据类型，参数是按值传递的，这意味着在函数内部的任何更改都不会被保留下来；</li>
+<li>对于对象类型，参数是按值传递的，因此传入的是对象实例在内存中位置的一个引用，这意味着在函数内部可以使用这个引用改变内存单元中存储的内容，因此函数内部对对象实例的更改都会被保留下来。</li>
+</ol>
+<h1 id="8-仍然可以使用对象实例访问静态变量，但这是不推荐的行为"><a href="#8-仍然可以使用对象实例访问静态变量，但这是不推荐的行为" class="headerlink" title="8.仍然可以使用对象实例访问静态变量，但这是不推荐的行为"></a>8.仍然可以使用对象实例访问静态变量，但这是不推荐的行为</h1><h1 id="9-静态方法不能访问实例变量，也不能使用this指针"><a href="#9-静态方法不能访问实例变量，也不能使用this指针" class="headerlink" title="9.静态方法不能访问实例变量，也不能使用this指针"></a>9.静态方法不能访问实例变量，也不能使用this指针</h1><h1 id="10-JAVA嵌套类"><a href="#10-JAVA嵌套类" class="headerlink" title="10.JAVA嵌套类"></a>10.JAVA嵌套类</h1><ol>
+<li>使用static修饰的叫做静态嵌套类，不能访问外类的实例成员；</li>
+<li>未使用static修饰的叫做内部类，内部类可以直接访问外类的实例成员，但是不可以定义静态成员；</li>
+</ol>
+<h1 id="11-JAVA局部类：Local-Class"><a href="#11-JAVA局部类：Local-Class" class="headerlink" title="11.JAVA局部类：Local Class"></a>11.JAVA局部类：Local Class</h1><ol>
+<li>局部类定义在方法体，循环体或条件语句执行体中</li>
+<li>局部类只能访问定义为final的局部成员，因此它们自己也不能定义任何静态成员</li>
+</ol>
+<h1 id="12-匿名类中不能定义构造函数"><a href="#12-匿名类中不能定义构造函数" class="headerlink" title="12.匿名类中不能定义构造函数"></a>12.匿名类中不能定义构造函数</h1><h1 id="13-一个接口可以继承多个接口"><a href="#13-一个接口可以继承多个接口" class="headerlink" title="13.一个接口可以继承多个接口"></a>13.一个接口可以继承多个接口</h1><h1 id="14-若定义了一个接口类型的变量，则任何赋值给它的对象都必须是实现了这个接口的类的实例"><a href="#14-若定义了一个接口类型的变量，则任何赋值给它的对象都必须是实现了这个接口的类的实例" class="headerlink" title="14.若定义了一个接口类型的变量，则任何赋值给它的对象都必须是实现了这个接口的类的实例"></a>14.若定义了一个接口类型的变量，则任何赋值给它的对象都必须是实现了这个接口的类的实例</h1><h1 id="15-除了Object没有父类外，所有的类都有且仅有一个直接父类"><a href="#15-除了Object没有父类外，所有的类都有且仅有一个直接父类" class="headerlink" title="15.除了Object没有父类外，所有的类都有且仅有一个直接父类"></a>15.除了Object没有父类外，所有的类都有且仅有一个直接父类</h1><h1 id="16-子类可以通过继承父类中的public或protected类型的嵌套类来实现访问父类的private域值"><a href="#16-子类可以通过继承父类中的public或protected类型的嵌套类来实现访问父类的private域值" class="headerlink" title="16.子类可以通过继承父类中的public或protected类型的嵌套类来实现访问父类的private域值"></a>16.子类可以通过继承父类中的public或protected类型的嵌套类来实现访问父类的private域值</h1><h1 id="17-静态方法不被继承"><a href="#17-静态方法不被继承" class="headerlink" title="17.静态方法不被继承"></a>17.静态方法不被继承</h1><h1 id="18-所有的数组，包括主数据类型数组在内，都是继承自Object类的类型"><a href="#18-所有的数组，包括主数据类型数组在内，都是继承自Object类的类型" class="headerlink" title="18.所有的数组，包括主数据类型数组在内，都是继承自Object类的类型"></a>18.所有的数组，包括主数据类型数组在内，都是继承自Object类的类型</h1><h1 id="19-copy只简单复制引用，clone则复制内存块，"><a href="#19-copy只简单复制引用，clone则复制内存块，" class="headerlink" title="19.copy只简单复制引用，clone则复制内存块，"></a>19.copy只简单复制引用，clone则复制内存块，</h1><h1 id="20-抽象类不能被实例化，但可以被继承，子类中要么实现抽象类方法，要么把它们也声明为抽象方法"><a href="#20-抽象类不能被实例化，但可以被继承，子类中要么实现抽象类方法，要么把它们也声明为抽象方法" class="headerlink" title="20.抽象类不能被实例化，但可以被继承，子类中要么实现抽象类方法，要么把它们也声明为抽象方法"></a>20.抽象类不能被实例化，但可以被继承，子类中要么实现抽象类方法，要么把它们也声明为抽象方法</h1>
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>TSheng</span>
+                    </p>
+                
+                
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Keep <strong>CALM<strong>, keep <strong>GOING<strong>!</strong></strong></strong></strong></span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/JAVA/"># JAVA</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2019/10/24/ThinkingInJAVA/">《JAVA编程思想-4th.Edition》</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© TSheng | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>

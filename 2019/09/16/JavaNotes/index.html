@@ -235,6 +235,14 @@
 <li>win-Os下可以双击运行此可执行文件，终端可以通过命令：<code>java -jar YourAppName.jar</code>启动此程序；</li>
 <li>通过命令：<code>jar -tf YourAppName.jar</code>可以打印出程序包中的文件结构；通过命令：<code>jar -xf YourAppName.jar</code>可以从程序包中解压出类文件。</li>
 </ol>
+<h1 id="15"><a href="#15" class="headerlink" title="15"></a>15</h1><p>JAVA构造器的访问控制类型如何起作用？</p>
+<ol>
+<li>若为public，则所有类都可以使用它；</li>
+<li>若为protected，则包和子类可用；</li>
+<li>若为default，则本包可用；</li>
+<li>若为private，则只有本类可用。<br>当某个类只有一个声明为private的构造器时，该类无法被继承。</li>
+</ol>
+<h1 id="16"><a href="#16" class="headerlink" title="16"></a>16</h1><p>当子类继承自一个没有默认构造器的父类时，它必须用super显式调用父类构造器；</p>
 
         </div>
 
