@@ -7,7 +7,7 @@
 
 
 
-<title>RMS调度算法和EDF调度算法 | T-ian</title>
+<title>《Head First 设计模式》阅读笔记 | T-ian</title>
 
 
 
@@ -165,7 +165,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">RMS调度算法和EDF调度算法</h1>
+            <h1 class="post-title">《Head First 设计模式》阅读笔记</h1>
             
                 <div class="post-meta">
                     
@@ -174,7 +174,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">十二月 1, 2019&nbsp;&nbsp;10:20:05</a>
+                        Date: <a href="#">十二月 2, 2019&nbsp;&nbsp;15:23:55</a>
                         </span>
                     
                     
@@ -183,14 +183,25 @@
         </header>
 
         <div class="post-content">
-            <h1 id="RMS调度算法"><a href="#RMS调度算法" class="headerlink" title="RMS调度算法"></a>RMS调度算法</h1><ol>
-<li>当系统中存在n个被调度进程时，对于每个进程P(c,T)，其中c为该进程的执行时间，T为该进程的截止时间（所谓截止时间也即该进程应该在T时刻之前完成执行），则RMS调度算法的原则是，在运行前根据T确定优先级，T越小优先级越高。</li>
-<li>在运行过程中，按照优先级先后顺序循环调用各个进程，给他们分配相当于执行时间c的处理器时间，若一次循环后所有的进程都能在它的截止时间T之前完成执行任务，则我们称这组任务是RMS可调度的。</li>
-<li>从理论上来讲，对于一组任务P<sub>1</sub>~P<sub>n</sub>，存在一个理论值n·(2<sup>1/n</sup>-1)，当Σc<sub>i</sub>/T<sub>i</sub>小于这个理论值时，这组任务是可调度的。</li>
-</ol>
-<h1 id="EDF算法"><a href="#EDF算法" class="headerlink" title="EDF算法"></a>EDF算法</h1><ol>
-<li>EDF算法同样按照截止时间T来确定优先级，T越小优先级越高。不同的是，EDF算法中进程的优先级是动态变化的，每一次当进程获得处理机时，它都要首先向系统声明自己当前的截止时间，系统会对比所有进程的截止时间然后确定谁应该获得处理机。</li>
-<li>EDF算法是理论上最佳的算法，对于一组进程只要Σc<sub>i</sub>/T<sub>i</sub>&lt;1，那么这组进程就是可调度的。</li>
+            <h1 id="1-策略模式"><a href="#1-策略模式" class="headerlink" title="1 策略模式"></a>1 策略模式</h1><p><strong>定义了算法簇，将其封装起来，使算法的变化独立于使用算法的客户</strong></p>
+<p>涉及到维护时，为了复用目的使用继承的结局并不完美。为超类添加一个方法或属性时，要警惕所有子类都会具有这种方法或属性，包括那些本来不应该具有这些属性的子类。如果放弃继承，转而使用接口呢？这也不是一个好办法，因为接口不能实现代码的复用。一种解决这个问题的方法是—：</p>
+<ul>
+<li>把不变的部分和变化的部分分离开来</li>
+</ul>
+<p>把易变的部分从类中提取出来，让它成为一个新的类——行为类，这个类的作用就是实现接口，原先那些超类的方法此时在这些行为类内具体实现。这样做的好处是，超类不需要考虑行为的实现细节。</p>
+<ul>
+<li>针对接口编程，而不是针对实现编程</li>
+</ul>
+<p>在超类中，用接口定义替换原先的方法定义，根据不同的行为，创建不同的行为类实现接口。</p>
+<ul>
+<li>多用组合，少用继承</li>
+</ul>
+<h1 id="2-观察者模式"><a href="#2-观察者模式" class="headerlink" title="2 观察者模式"></a>2 观察者模式</h1><p><strong>旨在实现交互对象之间的松耦合，在对象之间定义一对多的以来，这样当一个对象改变状态时，依赖它的对象都会收到通知并自动更新</strong></p>
+<p>观察者模式的工作方式：</p>
+<ol>
+<li>需要一个主体来完成观察者的注册、删除以及类似notify的通知方法等；</li>
+<li>需要一个观察者类接口，其中定义众多观察者所共有的行为；</li>
+<li>每一个观察者都要实现观察者类接口，定义属于自己的特定行为；每个观察者的构造函数需要以主题对象为传入参数，通过调用主题对象的注册方法完成自己在主题中的注册。</li>
 </ol>
 
         </div>
@@ -220,7 +231,7 @@
                 <span class="tag">
                     
                     
-                        <a href="/tags/LINUX/"># LINUX</a>
+                        <a href="/tags/设计模式/"># 设计模式</a>
                     
                         
                 </span>
@@ -233,10 +244,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2019/12/02/DesignModel/">《Head First 设计模式》阅读笔记</a>
             
-            
-            <a class="next" rel="next" href="/2019/11/22/JavaExam/">JavaExam</a>
+            <a class="next" rel="next" href="/2019/12/01/ScheduleAlgorithm/">RMS调度算法和EDF调度算法</a>
             
         </section>
 
