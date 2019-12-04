@@ -219,6 +219,46 @@
 <li>不要让变量持有具体类的引用（除非你肯定这个类一定不会改变）；不要让类派生自具体类，而应该派生自抽象类或者接口</li>
 <li>不要覆盖基类中已实现的方法，否则说明这个基类不适合被继承，基类中已实现的方法应该是所有子类都能共享的方法</li>
 </ul>
+<h1 id="5-单件模式"><a href="#5-单件模式" class="headerlink" title="5 单件模式"></a>5 单件模式</h1><p><strong>确保一个类只有一个实例，提供一个全局访问点来实例化这个类</strong></p>
+<ol>
+<li>首先，这个特殊的类的构造函数被声明为私有类型，这使得外部代码无法创建这个类的实例；</li>
+<li>其次，在这个类中声明一个类型为这个类的静态变量，用来存储将来实例化后的这个类的那个惟一对象；</li>
+<li>同时，这个类提供一个<code>getInstance()</code>的静态方法，通过判断上面那个静态实例变量是否为<code>null</code>，来决定是否使用通过<code>new</code>运算符调用私有构造器，来实例化一个变量，并将其赋值给上面那个静态实例变量，<code>getInstance()</code>的返回值为这个静态实例变量。</li>
+<li><code>JAVA1.2</code>以后解决了当单件对象失去引用后被垃圾收集器回收的bug。</li>
+</ol>
+<p>但是上面的步骤仍然不能保证这个类只被实例化一次，在多线程的应用场景下，由于<code>getInstance()</code>方法不是互斥访问的，所以存在多个线程先后满足条件，创建出多个实例的情况。因此需要使用关键字<code>synchronized</code>来实现同步机制。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassName</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> ClassName <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">/** codes */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>synchronized</code>可能带来代码性能的显著下降，解决办法有二：</p>
+<ul>
+<li>在静态实例变量声明的同时初始化它，这样在JVM加载这个类的同时就创建了这个类的单件实例，实现了线程安全。</li>
+<li><code>synchronized</code>影响性能的方式是，当多个线程同时访问<code>getInstance()</code>函数时，除了首个获得权限进入临界区的进程以外，其他进程都要在外面等待这个进程完成执行，因此理想的情况应该是，只有在<code>getInstance()</code>第一次被访问时才需要利用<code>synchronized</code>防止多个进程创建多个实例，其他情况下可以允许多个进程进入<code>getInstance()</code>函数，进行<code>if</code>条件语句的判断，因为实例已经被创建，所以这些后来的进程不用执行<code>synchronzied</code>内容就获得了实例。这里需要使用到轻量级的同步机制<code>volatile</code>：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassName</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">static</span> ClassName classInstance;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">ClassName</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ClassName <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (classInstance == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (ClassName.class) &#123;</span><br><span class="line">                <span class="keyword">if</span> (classInstance == <span class="keyword">null</span>) &#123;</span><br><span class="line">                    classInstance = <span class="keyword">new</span> ClassName();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> classInstance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="关于volatile的使用"><a href="#关于volatile的使用" class="headerlink" title="关于volatile的使用"></a>关于<code>volatile</code>的使用</h2><p><code>volatile</code>是JAVA用于实现轻量级线程同步的机制，它的原理是将变量存储在主存中，并且将它标记为易变的。这意味着，如果某个进程改变了这个变量，那么这个变量将同步到所有进程的工作内存中。</p>
+<ol>
+<li><p>JAVA内存模型JMM<br>JVM中维护一个主内存，每个线程维护一个各自的本地内存。JAVA中所有变量都存储在主存中，对于所有线程都是共享的。线程对于变量的使用在自己的工作内存中进行，线程将某些变量从主存拷贝到自己的工作内存中使用。<br>这样就会带来一个问题，当某个线程中使用到了一个变量并且修改了它的值时，由于这个修改动作是在这个线程自己的工作内存中进行的，其他线程暂时还不知道这个事件，这样就会带来线程之间的同步问题。<code>volatile</code>标记的变量存在在主存中，且要求线程在使用这个变量时只能从主存中存取，而不能用自己线程工作内存中的缓存，从而实现所标记变量在所有线程中的实时更新。</p>
+</li>
+<li><p><code>static</code>和<code>volatile</code>的区别<br>首先二者的功能定位不同，<code>static</code>标记的变量强调惟一性，<code>volatile</code>标记的变量强调一致性。使用<code>static</code>标记的变量同样存放在主存中，要求线程在初次使用这个变量时从主存中获得，不同的是，它只要求线程在创建的时候从主存中获得与其他线程具有相同来源的这个静态变量（保证了惟一性），但是在实际运行时不同线程还是在各自的工作内存中使用这个变量的拷贝，而不像<code>volatile</code>那样使用的是具有同步机制的同一个变量。因此<code>static</code>不能解决线程间的同步问题。</p>
+</li>
+</ol>
+<h1 id="6-命令模式"><a href="#6-命令模式" class="headerlink" title="6 命令模式"></a>6 命令模式</h1><p><strong>将请求封装成对象</strong></p>
+<ol>
+<li><p>命令模式中的四个层次</p>
+</li>
+<li><p>1 命令模式的客户<br>命令模式的客户就是实现系统最外层的那个类，一般为test。</p>
+</li>
+<li><p>2 请求的发起者<br>请求的发起者在命令模式中起着“遥控器”的作用，命令模式的客户通过这个遥控器来告诉系统期望执行何种命令。遥控器类中一般都有<code>setCommand()</code>方法来设置按下按钮的行为，通过提供这个函数，命令模式客户可以根据需要设置按钮功能。遥控器类中还有一个<code>Command</code>接口实例，用于存放使用<code>setCommand()</code>设置的命令对象实例。</p>
+</li>
+<li><p>3 命令对象<br>所有的命令对象类都实现一个命令接口<code>Command</code>，这个接口中一般都有一个方法<code>execute()</code>用于编写不同的功能实体的启动方式；命令对象的构造函数以功能实体类为参数，每一个命令对象绑定一个功能实体。</p>
+</li>
+<li><p>3 请求的接收者<br>请求的接收者在命令模式中是功能实现的具体承担者，即功能实体。在命令对象的<code>execute()</code>中调用这个功能实体实现具体功能。</p>
+</li>
+<li><p>空命令对象<br>有时候创建一个名为<code>NoCommand</code>的命令对象类，但是在它实现的<code>execute()</code>中什么也不做。这个命令对象叫空命令对象，它也是很有用的，比如可以用来初始化遥控器类。</p>
+</li>
+</ol>
+<h2 id="宏命令和Party模式"><a href="#宏命令和Party模式" class="headerlink" title="宏命令和Party模式"></a>宏命令和Party模式</h2><p>所谓Party模式，就是一次性执行多个功能实体的命令服务方式。所谓宏命令，其实就是一个包含<code>Command</code>接口类数组为实例变量的<code>Command</code>接口实现类，通过数组形式实现多个命令的一次性执行。</p>
 
         </div>
 
