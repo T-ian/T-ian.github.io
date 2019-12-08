@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+
+<title>网络聊天程序 | T-ian</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Home</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Home</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">网络聊天程序</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">TSheng</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">十二月 5, 2019&nbsp;&nbsp;16:10:43</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><p>俗话说，“talking is cheap, show me your code”</p>
+<h2 id="JAVA服务端程序"><a href="#JAVA服务端程序" class="headerlink" title="JAVA服务端程序"></a>JAVA服务端程序</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.OutputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.PrintWriter;</span><br><span class="line"><span class="keyword">import</span> java.net.ServerSocket;</span><br><span class="line"><span class="keyword">import</span> java.net.Socket;</span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Server</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Server</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> PORT = <span class="number">4000</span>;   <span class="comment">// 指定通信端口</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> String END_OF_MESSAGE = <span class="string">"$$"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">launch</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        ServerSocket server = <span class="keyword">new</span> ServerSocket(PORT);</span><br><span class="line">        Socket requSocket = server.accept();</span><br><span class="line">        </span><br><span class="line">        InputStream inStream = requSocket.getInputStream();</span><br><span class="line">        OutputStream outputStream = requSocket.getOutputStream();</span><br><span class="line"></span><br><span class="line">        Scanner in = <span class="keyword">new</span> Scanner(inStream);</span><br><span class="line">        PrintWriter out = <span class="keyword">new</span> PrintWriter(outputStream, <span class="keyword">true</span> <span class="comment">/* autoFlush */</span>);</span><br><span class="line"></span><br><span class="line">        out.println(<span class="string">"Welcome! Let's talk."</span>);</span><br><span class="line">        <span class="keyword">while</span> (in.hasNextLine()) &#123;</span><br><span class="line">            String line = in.nextLine();</span><br><span class="line">            <span class="keyword">if</span> (line.equals(<span class="string">"Hello"</span>)) &#123;</span><br><span class="line">                out.println(<span class="string">"Hi"</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (line.equals(<span class="string">"Bye"</span>)) &#123;</span><br><span class="line">                out.println(<span class="string">"Bye"</span>);</span><br><span class="line">                out.println(END_OF_MESSAGE);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                out.println(<span class="string">"Can't understand what you said!"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        in.close();</span><br><span class="line">        out.close();</span><br><span class="line">        server.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> Server().launch();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="客户端程序"><a href="#客户端程序" class="headerlink" title="客户端程序"></a>客户端程序</h2><p>这是一个带用户界面的客户端程序，使用JAVA的swing组件来创建一个简单的聊天窗口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> java.awt.event.*;</span><br><span class="line"><span class="keyword">import</span> java.net.*;</span><br><span class="line"><span class="keyword">import</span> java.text.SimpleDateFormat;</span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String IP = <span class="string">"127.0.0.1"</span>;   <span class="comment">// 使用本机地址</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> PORT = <span class="number">4000</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String LINK_FAIL = <span class="string">"====================\n Connection build failed!\n"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String UNKOWN_HOST = <span class="string">"====================\n Unkown host!\n"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String IO_EXCEPTION = <span class="string">"====================\n I/O wrong!\n"</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String END_OF_MESSAGE = <span class="string">"$$"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Socket userSocket;</span><br><span class="line">    <span class="keyword">private</span> String userName;</span><br><span class="line">    <span class="keyword">private</span> InputStream inStream;</span><br><span class="line">    <span class="keyword">private</span> Scanner in;</span><br><span class="line">    <span class="keyword">private</span> OutputStream outStream;</span><br><span class="line">    <span class="keyword">private</span> PrintWriter out;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">boolean</span> serverStop;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Client</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        userName = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">launch</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        UserInterface.creatUI(userName);    <span class="comment">// 创建一个用户界面</span></span><br><span class="line">        <span class="keyword">boolean</span> error = <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            creatConnection();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ConnectException e) &#123;</span><br><span class="line">            UserInterface.chatWindow.append(LINK_FAIL);</span><br><span class="line">            error = <span class="keyword">true</span>;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (UnknownHostException e) &#123;</span><br><span class="line">            UserInterface.chatWindow.append(UNKOWN_HOST);</span><br><span class="line">            error = <span class="keyword">true</span>;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            UserInterface.chatWindow.append(IO_EXCEPTION);</span><br><span class="line">            error = <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (error) &#123;</span><br><span class="line">            shutDown();</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        String greeting;</span><br><span class="line">        <span class="keyword">while</span> ((greeting = in.nextLine()) == <span class="keyword">null</span>)</span><br><span class="line">            ;</span><br><span class="line">        serverStop = <span class="keyword">false</span>;</span><br><span class="line">        UserInterface.chatWindow</span><br><span class="line">                .append(<span class="keyword">new</span> SimpleDateFormat(<span class="string">"MM-dd HH:mm"</span>).format(<span class="keyword">new</span> Date()) + <span class="string">"\n"</span> + <span class="string">"Server: "</span> + greeting + <span class="string">"\n\n"</span>);</span><br><span class="line">        UserInterface.sendButton.addActionListener(<span class="keyword">new</span> ActionListener() &#123;</span><br><span class="line"></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">actionPerformed</span><span class="params">(ActionEvent e)</span> </span>&#123;</span><br><span class="line">                String message = UserInterface.inputText.getText();</span><br><span class="line">                <span class="keyword">if</span> (serverStop || message.equals(<span class="string">""</span>))</span><br><span class="line">                    <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">                out.println(message);</span><br><span class="line"></span><br><span class="line">                String currentTime = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"MM-dd HH:mm"</span>).format(<span class="keyword">new</span> Date());</span><br><span class="line">                UserInterface.chatWindow.append(currentTime + <span class="string">"\n"</span> + userName + <span class="string">": "</span> + message + <span class="string">"\n\n"</span>);</span><br><span class="line">                UserInterface.inputText.setText(<span class="string">""</span>);</span><br><span class="line">                UserInterface.inputText.requestFocus();</span><br><span class="line"></span><br><span class="line">                String line = in.nextLine();</span><br><span class="line">                <span class="keyword">if</span> (line.equals(END_OF_MESSAGE)) &#123;</span><br><span class="line">                    serverStop = <span class="keyword">true</span>;</span><br><span class="line">                    shutDown();</span><br><span class="line">                    UserInterface.sendButton.setEnabled(<span class="keyword">false</span>);</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    currentTime = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"MM-dd HH:mm"</span>).format(<span class="keyword">new</span> Date());</span><br><span class="line">                    UserInterface.chatWindow.append(currentTime + <span class="string">"\n"</span> + <span class="string">"Server: "</span> + line + <span class="string">"\n\n"</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">creatConnection</span><span class="params">()</span> <span class="keyword">throws</span> ConnectException, NullPointerException, IOException </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            userSocket = <span class="keyword">new</span> Socket(IP, PORT);</span><br><span class="line">            inStream = userSocket.getInputStream();</span><br><span class="line">            in = <span class="keyword">new</span> Scanner(inStream);</span><br><span class="line">            outStream = userSocket.getOutputStream();</span><br><span class="line">            out = <span class="keyword">new</span> PrintWriter(outStream, <span class="keyword">true</span> <span class="comment">/* autoFlush */</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span>(ConnectException connectException) &#123;</span><br><span class="line">            <span class="keyword">throw</span> connectException;</span><br><span class="line">        &#125; <span class="keyword">catch</span>(NullPointerException nullPointerException) &#123;</span><br><span class="line">            <span class="keyword">throw</span> nullPointerException;</span><br><span class="line">        &#125; <span class="keyword">catch</span>(IOException ioException) &#123;</span><br><span class="line">            <span class="keyword">throw</span> ioException;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">shutDown</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        in.close();</span><br><span class="line">        out.close();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            userSocket.close();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Client client = <span class="keyword">new</span> Client(<span class="string">"Tinshine"</span>);</span><br><span class="line">        client.launch();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="用户界面"><a href="#用户界面" class="headerlink" title="用户界面"></a>用户界面</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.swing.*;</span><br><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * UserInteface</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserInterface</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> String APP_NAME = <span class="string">"MSN"</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> String nameOfUser;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> JFrame frame;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> JPanel background;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> JPanel sendPanel;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> JTextArea chatWindow;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> JTextField inputText;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> JButton sendButton;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> JScrollPane chatWinJScrollPane;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> JScrollBar chatWinJScrollBar;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Point chatWinJScrollPoint;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">creatUI</span><span class="params">(String userName)</span> </span>&#123;</span><br><span class="line">        nameOfUser = userName;</span><br><span class="line">        </span><br><span class="line">        frame = <span class="keyword">new</span> JFrame(APP_NAME);</span><br><span class="line">        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span><br><span class="line">        background = <span class="keyword">new</span> JPanel();</span><br><span class="line">        background.setBorder(BorderFactory.createEmptyBorder(<span class="number">10</span>, <span class="number">5</span>, <span class="number">10</span>, <span class="number">5</span>));</span><br><span class="line">        background.setLayout(<span class="keyword">new</span> BoxLayout(background, BoxLayout.Y_AXIS));</span><br><span class="line"></span><br><span class="line">        chatWindow = <span class="keyword">new</span> JTextArea(<span class="number">10</span>, <span class="number">10</span>);</span><br><span class="line">        chatWindow.setLineWrap(<span class="keyword">true</span>);</span><br><span class="line">        chatWinJScrollPane = <span class="keyword">new</span> JScrollPane(chatWindow);</span><br><span class="line">        chatWinJScrollBar = chatWinJScrollPane.getVerticalScrollBar();</span><br><span class="line">        chatWinJScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);</span><br><span class="line">        chatWinJScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);</span><br><span class="line">        background.add(chatWinJScrollPane);</span><br><span class="line"></span><br><span class="line">        sendPanel = <span class="keyword">new</span> JPanel();</span><br><span class="line">        sendPanel.add(<span class="keyword">new</span> JLabel(userName + <span class="string">": "</span>));</span><br><span class="line">        inputText = <span class="keyword">new</span> JTextField(<span class="number">20</span>);</span><br><span class="line">        inputText.requestFocus();</span><br><span class="line">        sendPanel.add(inputText);</span><br><span class="line">        sendButton = <span class="keyword">new</span> JButton(<span class="string">"Send"</span>);</span><br><span class="line">        sendPanel.add(sendButton);</span><br><span class="line">        background.add(sendPanel);</span><br><span class="line"></span><br><span class="line">        frame.getContentPane().add(background);</span><br><span class="line">        frame.pack();</span><br><span class="line">        frame.setVisible(<span class="keyword">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="设计过程"><a href="#设计过程" class="headerlink" title="设计过程"></a>设计过程</h1><ol>
+<li>服务端使用<code>ServerSocket()</code>类创建一个Socket通信连接，使用<code>accept()</code>方法等待客户端请求。</li>
+<li>客户端使用<code>Socket()</code>类，根据指定的IP地址和端口号创建一个到服务端的Socket连接，随后就可以与服务端进行通信。</li>
+<li>UI界面主要负责打印客户端和服务端之间发送的消息，显示客户端用户姓名以及消息的发送时间。<br>效果如下：<br>Step1: 启动客户端<br><img src="https://img2018.cnblogs.com/blog/1159589/201912/1159589-20191205162734785-1837247046.png" alt><br>Step2: 发送问候语句，得到服务器答复<br><img src="https://img2018.cnblogs.com/blog/1159589/201912/1159589-20191205163000029-1599094667.png" alt><br>Step3:发送告别语句，结束Socket连接<br><img src="https://img2018.cnblogs.com/blog/1159589/201912/1159589-20191205163056763-1982565807.png" alt></li>
+</ol>
+<h1 id="API调用栈追踪"><a href="#API调用栈追踪" class="headerlink" title="API调用栈追踪"></a>API调用栈追踪</h1><p>以服务端为例，设置断点，追踪调用栈，得到如下所示的调用关系：</p>
+<p><img src="https://img2018.cnblogs.com/blog/1159589/201912/1159589-20191207203629987-562735189.jpg" alt></p>
+<p>在实例化<code>ServerSocket</code>类的时候，构造函数会调用<code>ServerSocket</code>类的<code>bind()</code>方法，后者会调用继承自抽象类<code>AbstractPlainSocketImpl</code>的<code>PlainSocketImpl</code>的<code>socketBind()</code>方法。在<code>socketBind()</code>中会调用用<code>native</code>关键字标注的<code>bind0()</code>方法。从而实现将一个socket连接绑定到指定的本地IP地址和端口号。</p>
+<ul>
+<li><code>native</code>关键字标注的方法为原生方法，一般是用其他语言写成的函数，常用来实现java语言对操作系统底层接口的访问。JAVA语言本身不能直接对操作系统底层进行操作，但是JAVA允许程序通过JAVA本机接口JNI，使用C/C++等其他语言实现这种操作。</li>
+</ul>
+<p>接着，同样的步骤，从<code>ServerSocket</code>类的<code>listen()</code>一直追溯到<code>PlainSocketImpl</code>的<code>socketListen()</code>方法的<code>listen0()</code>。该方法主要为了设置允许的最大连接请求队列长度，当请求队列满时，拒绝后来的连接请求。</p>
+<p>最后，同样，从<code>ServerSocket</code>类的<code>accept()</code>追溯到<code>accept0()</code>，等待连接请求的到来。</p>
+<h1 id="JAVA-Socket接口与LINUX-Socket接口对比"><a href="#JAVA-Socket接口与LINUX-Socket接口对比" class="headerlink" title="JAVA Socket接口与LINUX Socket接口对比"></a>JAVA Socket接口与LINUX Socket接口对比</h1><p>作为对比，LINUX提供的相应Socket API分别为：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建一个套接字</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">socket</span><span class="params">(itn domain, <span class="keyword">int</span> type, <span class="keyword">int</span> protocol)</span></span>;</span><br><span class="line"><span class="comment">// 将套接字绑定到地址上</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bind</span><span class="params">(<span class="keyword">int</span> sockfd, <span class="keyword">const</span> struct sockaddr *addr, <span class="keyword">socklen_t</span> addelen)</span></span>;</span><br><span class="line"><span class="comment">// 监听连接</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">listen</span><span class="params">(<span class="keyword">int</span> sockfd, <span class="keyword">int</span> backlog)</span></span>;</span><br><span class="line"><span class="comment">// 接收一个连接请求</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">accept</span><span class="params">(<span class="keyword">int</span> sockfd, struct sockaddr *addr, <span class="keyword">socklen_t</span> *addrlen)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>JAVA通过调用这些系统API来实现它的底层功能。不同之处在于，JAVA将这一切全都封装起来，这使得面向网络的编程对于JAVA程序员来说变得十分简单，我们只需要知道使用哪一个类（实际上就是<code>ServerSocket</code>和<code>Socket</code>两个类），为它们传入必要的地址参数，就能够轻松实现Socket通信。</p>
+<ul>
+<li>在window操作系统中，使用<code>native</code>标注的本地方法在编译时会生成一个动态链接库（.dll文件）为JAVA语言提供相应的本地服务。</li>
+</ul>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>TSheng</span>
+                    </p>
+                
+                
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Keep <strong>CALM<strong>, keep <strong>GOING<strong>!</strong></strong></strong></strong></span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/网络程序设计课实验/"># 网络程序设计课实验</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2019/12/05/网络程序设计课作业/E3/">E3</a>
+            
+            
+            <a class="next" rel="next" href="/2019/12/02/DesignModel/">《Head First 设计模式》阅读笔记</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© TSheng | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>

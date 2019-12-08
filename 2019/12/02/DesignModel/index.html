@@ -264,6 +264,42 @@
 <li>适配器实现客户期望的类型接口，适配器类构造函数以实际接口类为传入参数；</li>
 <li>适配器内有一个实际接口类的实例变量，在重写接口方法时，调用这个实例变量的方法来实现具体功能。</li>
 </ol>
+<h2 id="对象适配器和类适配器"><a href="#对象适配器和类适配器" class="headerlink" title="对象适配器和类适配器"></a>对象适配器和类适配器</h2><p>对象适配器即上文提到的适配模式，适配器实现期望接口，在接口内用组合的方式调用实际接口对象完成具体功能；<br>类适配器需要多重继承来完成（这在JAVA中是不可能的），类适配器同时继承期望类和实际类。</p>
+<h2 id="外观模式"><a href="#外观模式" class="headerlink" title="外观模式"></a>外观模式</h2><p><strong>提供了一个统一的接口，用来访问子系统中的一群接口。外观模式定义了一个高层接口，让子系统更容易使用</strong></p>
+<p>装饰模式不改变接口，但加入责任；适配器模式将一个接口转换为另一个接口；外观模式则提供一个子系统的简化接口。外观模式利用组合的方式，将多个子系统的某个执行顺序封装成为一个特定的方法。</p>
+<ul>
+<li>最少知识原则：在一个对象的方法中，之应该调用属于以下范围的方法：</li>
+</ul>
+<ol>
+<li>该对象本身；</li>
+<li>通过方法参数传入的对象；</li>
+<li>该方法本身实例化的对象；</li>
+<li>对象的自身的组件（实例变量）；</li>
+</ol>
+<p>比如，我们不应该调用从另一个调用中返回的对象的方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Not recommend</span></span><br><span class="line">String name = getInstance().getName();</span><br><span class="line"><span class="comment">// Recommend</span></span><br><span class="line">ClassName instance = getInstance();</span><br><span class="line"><span class="function">String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> instance.getName();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">String name = getName();</span><br></pre></td></tr></table></figure>
+
+<h1 id="8-封装算法"><a href="#8-封装算法" class="headerlink" title="8 封装算法"></a>8 封装算法</h1><p><strong>模板方法模式</strong>在一个方法中定义一个算法的框架，将一些步骤延迟到子类中。模板方法使得子类可以在不改变算法结构的情况下重新定义算法中的某些步骤。模板方法用于创造一个算法的模板。</p>
+<ol>
+<li><p>模板方法<code>templateMethod()</code>定义在一个抽象类<code>AbstractClass</code>中，为保证它不被子类覆盖，它被声明为<code>final</code>类型。</p>
+</li>
+<li><p>在这个抽象类除了模板方法<code>templateMethod()</code>以外，还有模板方法体中用到的一些方法<code>method1()</code>，<code>method2()</code>，这些方法的特点在于，对于具体的情况，这些方法有不同的实现形式，因此在抽象类<code>AbstractClass</code>中，这些<code>method1()</code>，<code>method2()</code>……被定义为抽象方法。</p>
+</li>
+<li><p>对于一个继承自<code>AbstractClass</code>的具体类来说，它要根据自己的具体情况，按照各自特定的方式实现上述那些抽象方法。</p>
+</li>
+</ol>
+<h2 id="钩子"><a href="#钩子" class="headerlink" title="钩子"></a>钩子</h2><p>钩子方法<code>hook()</code>定义在抽象类<code>AbstractClass</code>中，用于控制模板方法<code>templateMethod()</code>的执行顺序。因为一般情况下，具体类无法操控模板方法的执行过程，它能做的只有根据具体情况实现模板方法用到的抽象方法。</p>
+<p>钩子就是这种需求的产物，在抽象类中，按照模板方法默认的执行过程定义一个钩子方法。对于一个想改变模板方法执行过程的具体类，它可以通重写这个钩子方法来实现这种影响。</p>
+<ul>
+<li>好莱坞原则，把低层组件挂载到高层组件上，让高层组件决定调用低层组件的时机和方式。</li>
+</ul>
+<h1 id="9-迭代器与组合模式"><a href="#9-迭代器与组合模式" class="headerlink" title="9 迭代器与组合模式"></a>9 迭代器与组合模式</h1><h2 id="迭代器模式"><a href="#迭代器模式" class="headerlink" title="迭代器模式"></a>迭代器模式</h2><p><strong>提供一种方法顺序访问一个聚合对象种的各个元素，而又不暴露其内部的表示</strong></p>
+<p>迭代器用于顺序访问对象，它统一了具有不同数据结构的各个对象的访问形式。例如一个是数组对象，一个是ArrayList对象，通过实现<code>Iterator</code>接口，为两个对象分别创建用于迭代的Iterator类，在这两个类中根据数据结构实现具体的访问，在需要顺序访问的地方，借助多态机制传入Iterator接口对象，从而实现对差异性的封装。</p>
+<ul>
+<li>一个类应该只保持一个可能引起它变化的原因；在设计类的时候，应该让每个类保持单一的责任。这种设计原则可以让我们设计出来的模块具有<strong>高内聚</strong>的特点，更容易维护。</li>
+</ul>
+<h2 id="组合模式"><a href="#组合模式" class="headerlink" title="组合模式"></a>组合模式</h2><p><strong>让客户以统一形式处理个别对象和对象组合</strong></p>
+<p>考虑JAVA图形界面中的组件和容器，容器包含组件，我们通常将容器也视为组件，这样组件和容器的共性就能提取出来。试想，先构建一个抽象组件类，向其中写入组件和容器的方法，再让组件和容器分别继承自这个抽象类，它们再按照各自需要重写抽象类中的方法，对于那些它们用不到的方法，直接忽略掉就好了。</p>
 
         </div>
 
@@ -304,6 +340,8 @@
             </div>
         </section>
         <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2019/12/05/网络程序设计课作业/E2/">网络聊天程序</a>
             
             
             <a class="next" rel="next" href="/2019/12/01/ScheduleAlgorithm/">RMS调度算法和EDF调度算法</a>
