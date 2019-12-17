@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+
+<title>C++笔记 | T-ian</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Home</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Home</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">C++笔记</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">TSheng</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">十二月 15, 2019&nbsp;&nbsp;19:37:05</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="自增运算符副作用"><a href="#自增运算符副作用" class="headerlink" title="自增运算符副作用"></a>自增运算符副作用</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">y = <span class="number">4</span> + x++ + <span class="number">6</span> + x++;</span><br></pre></td></tr></table></figure>
+
+<p>句末分号是程序的顺序点，程序保证分号以后x得到了两次递增，但是不能保证在中间运算过程中，x被递增的时机。</p>
+<h2 id="前后缀运算符的区别"><a href="#前后缀运算符的区别" class="headerlink" title="前后缀运算符的区别"></a>前后缀运算符的区别</h2><p>如果用户针对自己定义的类重载了自增运算符，则后缀的版本因为变量是先被使用后自增，所以回复制一个副本，加一返回，所以后缀版本效率略慢于前缀版本。</p>
+<h1 id="数组初始化"><a href="#数组初始化" class="headerlink" title="数组初始化"></a>数组初始化</h1><ol>
+<li><p>只有在定义数组的时候才能初始化</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> arr[] = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;    <span class="comment">// 合法</span></span><br><span class="line">arr = &#123;<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>&#125;;  <span class="comment">// 非法</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>省略等号的初始化列表</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> arr[] &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;    <span class="comment">// 合法</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>初始化列表禁止缩窄转换</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> arr[] &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3.0</span>&#125;;    <span class="comment">// 非法</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="模板类array"><a href="#模板类array" class="headerlink" title="模板类array"></a>模板类array</h2><p>类似数组，更方便安全，申请长度固定的数组</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;array&gt;</span></span></span><br><span class="line"><span class="built_in">array</span>&lt;<span class="keyword">int</span> , 4&gt; arr = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="二维数组作为函数参数"><a href="#二维数组作为函数参数" class="headerlink" title="二维数组作为函数参数"></a>二维数组作为函数参数</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 函数原型</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> col = <span class="number">10</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span> (*ptr)[col], <span class="keyword">int</span> row)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span> ptr[][col], <span class="keyword">int</span> row)</span></span>;   <span class="comment">// 二者等价</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h1><h2 id="初始化C风格字符串"><a href="#初始化C风格字符串" class="headerlink" title="初始化C风格字符串"></a>初始化C风格字符串</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> s1[] = &#123;<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'\0'</span>&#125;;  <span class="comment">// 以0字符结尾</span></span><br><span class="line"><span class="keyword">char</span> s2[] = <span class="string">"abc"</span>;</span><br><span class="line"><span class="keyword">char</span> s3[<span class="number">5</span>] = <span class="string">"abc"</span>; <span class="comment">// 多出来的数组元素全部用0字符填充</span></span><br><span class="line"><span class="keyword">char</span> *s4 = <span class="string">"abc"</span>;   <span class="comment">// s4可作为数组名访问元素或传入函数</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="字符串常量允许拼接"><a href="#字符串常量允许拼接" class="headerlink" title="字符串常量允许拼接"></a>字符串常量允许拼接</h2><p>使用空格、换行符、制表符隔开的字符串常量会忽略结尾0字符，自动拼接。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"A dog"</span> <span class="string">" is"</span>   <span class="string">" an"</span></span><br><span class="line"><span class="string">"animal."</span> &lt;&lt; <span class="built_in">endl</span>;  </span><br><span class="line"><span class="comment">// A dog is an animal.</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="cin-get-比cin-getline-更精细"><a href="#cin-get-比cin-getline-更精细" class="headerlink" title="cin.get()比cin.getline()更精细"></a>cin.get()比cin.getline()更精细</h2><p>导致cin.getline()停止读取的原因可能是读到了换行符，也可能是数组已经填满，使用getline时并不清楚是哪种原因导致了这种情况。如果使用的是cin.get()那么只需要判断下一个get到的字符是不是换行符就能知道了。</p>
+<h2 id="初始化string类型变量"><a href="#初始化string类型变量" class="headerlink" title="初始化string类型变量"></a>初始化string类型变量</h2><ol>
+<li><p>首先需要包含头文件<code>string</code><br>跟<code>cstring</code>不同，<code>cstring</code>是将<code>string.h</code>封装起来的C++版本的字符串头文件，而<code>string</code>为C++提供了字符串变量这个类型，实际上字符串变量是个类。</p>
+</li>
+<li><p>可以用字符串数组初始化字符串变量</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> chs[] = &#123;<span class="string">'1'</span>, <span class="string">'2'</span>, <span class="string">'\0'</span>&#125;;</span><br><span class="line"><span class="built_in">string</span> str = chs;   <span class="comment">// 合法</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取字符串变量的长度</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> chs[] = &#123;<span class="string">'1'</span>, <span class="string">'2'</span>, <span class="string">'\0'</span>&#125;;</span><br><span class="line"><span class="built_in">string</span> str = chs;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; str.size() &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// 合法</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="built_in">strlen</span>(str) &lt;&lt; <span class="built_in">endl</span>;    <span class="comment">// 非法</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>从IO流中读入字符串</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> charr[<span class="number">20</span>];</span><br><span class="line"><span class="built_in">cin</span>.getline(charr, <span class="number">20</span>);</span><br><span class="line"><span class="built_in">string</span> str;</span><br><span class="line">getline(<span class="built_in">cin</span>, str);  <span class="comment">// 读取到换行符</span></span><br><span class="line"><span class="built_in">cin</span> &gt;&gt; str; <span class="comment">// 以空格换行符制表符为分隔</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h1 id="结构体初始化"><a href="#结构体初始化" class="headerlink" title="结构体初始化"></a>结构体初始化</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">hero</span>&#123;</span></span><br><span class="line">    <span class="built_in">string</span> name;</span><br><span class="line">    <span class="keyword">char</span> align[<span class="number">10</span>];</span><br><span class="line">    <span class="keyword">int</span> HP;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">hero dema = &#123;<span class="string">"Demacya"</span>, <span class="string">"warrior"</span>, <span class="number">100</span>&#125;;    <span class="comment">// 初始化列表里填上合适的参数即可</span></span><br><span class="line"><span class="comment">// 等号可以省略</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="共用体-简单提一下"><a href="#共用体-简单提一下" class="headerlink" title="共用体-简单提一下"></a>共用体-简单提一下</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">union</span> id&#123;</span><br><span class="line">    <span class="keyword">char</span> id_char[<span class="number">10</span>];</span><br><span class="line">    <span class="keyword">int</span> id_int;</span><br></pre></td></tr></table></figure>
+
+<p>共用体用来节省内存，用在同一个数据在不同时间具有不同的数据类型的情况。</p>
+<h1 id="枚举类型"><a href="#枚举类型" class="headerlink" title="枚举类型"></a>枚举类型</h1><p>这玩意有啥用？</p>
+<h1 id="函数指针"><a href="#函数指针" class="headerlink" title="函数指针"></a>函数指针</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 函数原型</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sum_1</span><span class="params">(<span class="keyword">int</span>, <span class="keyword">int</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sum_2</span><span class="params">(<span class="keyword">int</span>, <span class="keyword">int</span>)</span></span>;</span><br><span class="line"><span class="comment">// 传入函数指针的函数实现</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">cal_sum</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> (*ptr)(<span class="keyword">int</span>, <span class="keyword">int</span>))</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    sum = (*ptr)(a, b);</span><br><span class="line">    <span class="comment">// sum = ptr(a, b);</span></span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 调用方法</span></span><br><span class="line"><span class="keyword">int</span> a = <span class="number">0</span>, b = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> sum1 = cal_sum(a, b, sum_1);</span><br><span class="line"><span class="keyword">int</span> sum2 = cal_sum(a, b, sum_2);</span><br></pre></td></tr></table></figure>
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>TSheng</span>
+                    </p>
+                
+                
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Keep <strong>CALM<strong>, keep <strong>GOING<strong>!</strong></strong></strong></strong></span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/C/"># C++</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2019/12/12/Network/">《图解TCP/IP》阅读笔记</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© TSheng | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>

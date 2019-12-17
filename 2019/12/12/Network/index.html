@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+
+<title>《图解TCP/IP》阅读笔记 | T-ian</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Home</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Home</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">《图解TCP/IP》阅读笔记</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">TSheng</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">十二月 12, 2019&nbsp;&nbsp;10:41:53</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="1-5-协议分层与OSI参考模型"><a href="#1-5-协议分层与OSI参考模型" class="headerlink" title="1.5 协议分层与OSI参考模型"></a>1.5 协议分层与OSI参考模型</h1><ol>
+<li>接口与协议<br>上下层之间交互所遵循的约定叫<strong>接口</strong>；同一层之间叫<strong>协议</strong>。</li>
+</ol>
+<h1 id="1-6-OSI参考模型通信处理举例"><a href="#1-6-OSI参考模型通信处理举例" class="headerlink" title="1.6 OSI参考模型通信处理举例"></a>1.6 OSI参考模型通信处理举例</h1><ol>
+<li><p>应用层<br>应用软件包含与通信相关和通信无关的两部分功能，其中与通信相关的部分工作在应用层。</p>
+</li>
+<li><p>表示层<br>将数据从某个计算机特定的数据格式转换为网络通用的标准数据格式。</p>
+</li>
+<li><p>会话层<br>决定采用何种连接方法。</p>
+</li>
+<li><p>传输层<br>进行连接的建立和断开的处理，在两个主机之间创建逻辑上的通信连接。因此可见，传输层要保证数据传输的可靠性。</p>
+</li>
+<li><p>网络层<br>基于目标地址将数据准确发送给接收端。与数据链路层不同的是，网络层负责将数据发送给最终的目标地址，而数据链路层使用的目标地址用来在一个分段内完成数据发送。</p>
+</li>
+<li><p>数据链路层</p>
+</li>
+<li><p>物理层</p>
+</li>
+</ol>
+<h1 id="1-7-传输方式的分类"><a href="#1-7-传输方式的分类" class="headerlink" title="1.7 传输方式的分类"></a>1.7 传输方式的分类</h1><ol>
+<li>按接收端数量分类</li>
+</ol>
+<ul>
+<li>单播：固话</li>
+<li>广播：电视广播</li>
+<li>多播：电视会议</li>
+<li>任播：DNS根域名解析服务器</li>
+</ul>
+<h1 id="1-9-网络构成要素"><a href="#1-9-网络构成要素" class="headerlink" title="1.9 网络构成要素"></a>1.9 网络构成要素</h1><ol>
+<li><p>网卡<br>全称网络接口卡NIC</p>
+</li>
+<li><p>中继器<br>在物理层面上延长网络；光电信号转换；波形调整和放大。</p>
+</li>
+<li><p>网桥<br>工作在数据链路层，对数据帧进行存储转发，因此可以适配不同速率的数据链路；检查数据帧FCS，丢弃错误帧；地址自学机制；集线器就是多个网桥。</p>
+</li>
+<li><p>路由器<br>工作在网络层。分组转发；连接不同链路；分担网络负荷。</p>
+</li>
+<li><p>交换机<br>负载均衡，带宽控制，防火墙等功能。</p>
+</li>
+<li><p>网关<br>协议转换；代理服务器；防火墙；</p>
+</li>
+</ol>
+<h1 id="2-4-TCP-IP协议模型"><a href="#2-4-TCP-IP协议模型" class="headerlink" title="2.4 TCP/IP协议模型"></a>2.4 TCP/IP协议模型</h1><ol>
+<li>物理层；数据链路层1</li>
+<li>互联网层（网络层）：IP，ICMP，ARP（从IP中解析出MAC）。</li>
+<li>传输层：TCP；UDP。</li>
+<li>应用层：WWW（其中HTML在OSI中属于表示层）；SMTP；FTP；TELNET和SSH（远程登录）；SNMP（网络管理）；</li>
+</ol>
+<h1 id="3-数据链路的作用"><a href="#3-数据链路的作用" class="headerlink" title="3 数据链路的作用"></a>3 数据链路的作用</h1><ol>
+<li><p>共享介质与非共享<br>接收端和发送端共用物理介质叫共享介质，只能实现半双工通信，使用CSMA/CD方式或令牌方式进行协作；非共享介质网络中发送端和接收端通过交换机进行连接，可以实现全双工通信，但是交换机故障则网络崩溃。</p>
+</li>
+<li><p>存储转发和直通转发<br>存储转发存储下整个数据帧，检测FCS再转发，可以处理错误。直通转发获取目标地址后即可开始转发，延迟低，但有发送错误帧的可能。</p>
+</li>
+</ol>
+<h1 id="4-2-IP基础知识"><a href="#4-2-IP基础知识" class="headerlink" title="4.2 IP基础知识"></a>4.2 IP基础知识</h1><ul>
+<li>一跳的范围<br>通过网桥或交换集线器连接的仍然在一个跳内；使用路由器或网关连接到下一跳。</li>
+</ul>
+<h1 id="4-5-IP分割处理与再构成"><a href="#4-5-IP分割处理与再构成" class="headerlink" title="4.5 IP分割处理与再构成"></a>4.5 IP分割处理与再构成</h1><ul>
+<li>IP报文的分片和重组<br>路由器只会做分片，只要路由器认为有必要，它就会进行分片。但是只有目标主机才有权进行重组。</li>
+</ul>
+<h2 id="路径MTU发现"><a href="#路径MTU发现" class="headerlink" title="路径MTU发现"></a>路径MTU发现</h2><p>将分片功能交给路由器是低效率的，如果我们希望给路由器降低工作负担，从而提升路由器的转发效率，就应该在发送主机处理分片问题。<strong>路径MTU</strong>将分片任务从IP层提升到传输层。<br>对于UDP协议来说，原理如下；</p>
+<ol>
+<li>目标主机最开始不对IP报文分组，可想而知，路由器会发现这个报文太大无法发送，但是路由器现在不能分割报文了，所以它只好丢弃这个报文，然后通过一个ICMP不可达消息告诉主机，自己这里能通过的最大单元MTU是多少。</li>
+<li>目标主机按照收到的MTU进行IP数据报的分割，然后再次将IP数据报发送到网络上。这个时候，有可能出现两种情况。其一，目前的MTU满足网络路径上所有路由器的需要，这个数据报的大小就是一个合适的值，主机将缓存当前的MTU，十分钟后，主机将重新确定网络中的MTU大小。其二，按照目前的MTU发送数据报仍然会收到ICMP不可达消息，则主机将根据收到的MTU继续缩小报文的大小，直至数据报可以正常到达目标主机。</li>
+</ol>
+<p>对于TCP协议来说，在建立连接的同时就确定发送数据包的大小：MSS，理想的情况下，它是IP中恰好不会被分片处理的最大的数据长度。</p>
+<ol>
+<li>两端主机在发出建立连接的请求时，会在TCP首部中写入MSS选项，告诉对方自己的接口能适应的MSS大小，收发端-将在两者之中选择一个较小值作为连接的MSS。</li>
+</ol>
+<h1 id="5-IP相关技术"><a href="#5-IP相关技术" class="headerlink" title="5 IP相关技术"></a>5 IP相关技术</h1><ul>
+<li>为提高网络容灾能力，设置多个DNS服务器</li>
+</ul>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>TSheng</span>
+                    </p>
+                
+                
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Keep <strong>CALM<strong>, keep <strong>GOING<strong>!</strong></strong></strong></strong></span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/网络/"># 网络</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2019/12/15/cpp/cpp-notes/">C++笔记</a>
+            
+            
+            <a class="next" rel="next" href="/2019/12/05/网络程序设计课作业/E3/">E3</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© TSheng | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>
