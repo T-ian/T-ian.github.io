@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+
+<title>e3 | T-ian</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Home</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Home</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">e3</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">TSheng</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">十二月 19, 2019&nbsp;&nbsp;11:01:44</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="1-重新搭建实验环境"><a href="#1-重新搭建实验环境" class="headerlink" title="1 重新搭建实验环境"></a>1 重新搭建实验环境</h1><p>前面都是用实验楼环境做的实验，偷的懒总是要还的，这一次重装环境前后花了十几个小时，踩了无数的坑。</p>
+<h2 id="1-1-Ubuntu和LINUX内核的区别"><a href="#1-1-Ubuntu和LINUX内核的区别" class="headerlink" title="1.1 Ubuntu和LINUX内核的区别"></a>1.1 Ubuntu和LINUX内核的区别</h2><p>Ubuntu是基于LINUX内核编写的一个操作系统。LINUX内核定义了一些基本的系统功能，Ubuntu在内核之上加入了图形界面，包管理等功能，优化了人机交互。本次实验，要求使用LINUX内核5.0以上，所以，在下载安装完Ubuntu系统后，需要对内核进行更新。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> uname -a</span><br></pre></td></tr></table></figure>
+
+<p>上面这个指令会显示Ubuntu当前的内核版本，我们可以通过它来观察内核的升级是否成功。</p>
+<h2 id="1-2-从零开始"><a href="#1-2-从零开始" class="headerlink" title="1.2 从零开始"></a>1.2 从零开始</h2><h3 id="下载安装Ubuntu"><a href="#下载安装Ubuntu" class="headerlink" title="下载安装Ubuntu"></a>下载安装Ubuntu</h3><p>首先到Ubuntu官网上下载一个Ubuntu镜像，但是太慢了，我们可以在国内的镜像网站上去下载。指路<a href="http://mirrors.163.com/ubuntu-releases/18.04.3/" target="_blank" rel="noopener">网易镜像</a>。<br>下载完成后，在VMware虚拟机中进行系统安装，没什么可说的。</p>
+<ol>
+<li><p>设置超级管理员<br>新装的系统没有超级管理员，所以需要先设置一个。执行下面的命令，按照提示要求完成管理员注册。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo passwd root</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置共享文件夹<br>为了方便VMware内虚拟主机和我们的主机进行交互，可以设置一个共享文件夹</p>
+</li>
+<li><p>1 首先将虚拟主机关机，然后在虚拟机设置=》选项卡中设置共享文件夹。</p>
+</li>
+<li><p>2 安装VMwareTools，在VMware菜单栏，点击“重新安装VMwareTools”。虚拟主机内会出现资源管理器，里面有下载好的压缩包，将它拷贝到桌面上解压。然后执行VMware底部弹出的建议命令，完成安装。</p>
+</li>
+<li><p>3 查看共享文件夹。共享文件夹的位置在<code>/mnt/hfgs/share/</code>。</p>
+</li>
+</ol>
+<h3 id="更换国内源"><a href="#更换国内源" class="headerlink" title="更换国内源"></a>更换国内源</h3><p>国外的资源下载速度实在太慢，所以在开始工作之前，建议先更换成国内镜像，指路<a href="https://mirrors.ustc.edu.cn/repogen/" target="_blank" rel="noopener">科大镜像</a>。</p>
+<ol>
+<li><p>备份原始源</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> sudo cp /etc/apt/sources.list /etc/apt/sources_backup.list</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改配置文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> sudo gedit /etc/apt/sources.list</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>把从网上找到的资源列表复制拷贝过来，点击资源管理器右上角的save按钮</p>
+<ol start="3">
+<li>更新源<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> sudo apt-get update</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="下载编译LINUX5-0内核"><a href="#下载编译LINUX5-0内核" class="headerlink" title="下载编译LINUX5.0内核"></a>下载编译LINUX5.0内核</h3><p>先下载5.0以上linux内核。</p>
+<ol>
+<li><p>解压内核文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> xz -d linux-5.0.1.tar.xz</span><br><span class="line"><span class="meta">$</span> tar -xvf linux-5.0.1.tar</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装依赖</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> sudo apt-get install build-essential</span><br><span class="line"><span class="meta">$</span> sudo apt-get install libelf-dev</span><br><span class="line"><span class="meta">$</span> sudo apt-get install libncurses-dev</span><br><span class="line"><span class="meta">$</span> sudo apt-get install flex</span><br><span class="line"><span class="meta">$</span> sudo apt-get install bison</span><br><span class="line"><span class="meta">$</span> sudo apt-get install libssl-dev</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置内核</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> cd /linux/5.0.1</span><br><span class="line"><span class="meta">$</span> sudo cp /boot/config-5.0.23-generic -r .config</span><br><span class="line"><span class="meta">$</span> sudo make oldconfig</span><br><span class="line"><span class="meta">$</span> sudo make localmodconfig</span><br><span class="line"><span class="meta">$</span> make menuconfig</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>在弹出的图形化界面中配置<br>kernel hacking -&gt; compile-time and compiler options 勾选 [*] compiler the kernel with debug info</p>
+<ol start="4">
+<li><p>编译内核</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> sudo make</span><br><span class="line"><span class="meta">$</span> sudo make modules_install</span><br><span class="line"><span class="meta">#</span> 更新</span><br><span class="line"><span class="meta">$</span> sudo make install</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重启虚拟机<br>查看内核版本是否已经是5.0.1</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> uname -a</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="1-3-搭建实验环境"><a href="#1-3-搭建实验环境" class="headerlink" title="1.3 搭建实验环境"></a>1.3 搭建实验环境</h2><ol>
+<li><p>安装qemu模拟命令，加载linux内核</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> sudo apt install qemu</span><br><span class="line"><span class="meta">$</span> qemu-sysem-x86_64 -kernel linux-5.0.1/arch/x86_64/boot/bzIamge</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>剩余的部分主要是配置qemu环境，把写好的replyhi网络聊天程序集成到qemu中，和上一次实验内容相同，不再重复演示。</p>
+</li>
+</ol>
+<h1 id="2-Socket系统调用分析"><a href="#2-Socket系统调用分析" class="headerlink" title="2 Socket系统调用分析"></a>2 Socket系统调用分析</h1><p>按照实验要求，我们分为两个方向来研究Socket系统调用。实验指出，内核将系统调用作为一个特殊中断来处理，因此首先我们对这一点进行验证；其次我们将探究，对于不同的协议，Socket系统调用源码中是如何封装协议细节的，是否使用了实验提到的“多态”机制，怎么实现的。</p>
+<h2 id="2-1-系统调用的中断实现"><a href="#2-1-系统调用的中断实现" class="headerlink" title="2.1 系统调用的中断实现"></a>2.1 系统调用的中断实现</h2><h3 id="修改Makefile"><a href="#修改Makefile" class="headerlink" title="修改Makefile"></a>修改Makefile</h3><p>为探究64位程序中socket的系统调用行为，我们首先需要对上一节使用到的Makefile进行修改</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span> Makefile for linuxnet/lab3</span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span> ... 省略前文</span><br><span class="line"></span><br><span class="line">rootfs:</span><br><span class="line">        gcc -o init linktable.c menu.c main.c -m64 -static -lpthread</span><br><span class="line">        find init | cpio -o -Hnewc |gzip -9 &gt; ../../rootfs.img</span><br><span class="line">        qemu-system-x86_64 -kernel ../../linux-5.0.1/arch/x86/boot/bzImage -initrd ../../rootfs.img -append nokaslr -s -S </span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> ...省略后文</span><br></pre></td></tr></table></figure>
+
+<p>在编译指令gcc那一行，将编译选项由<code>-m32</code>改为<code>-m64</code>。<br>执行指令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> make rootfs</span><br></pre></td></tr></table></figure>
+
+<p>我们得到了新的64位可执行文件<code>init</code>。</p>
+<h3 id="GDB调试"><a href="#GDB调试" class="headerlink" title="GDB调试"></a>GDB调试</h3><p>使用GDB调试<code>init</code>，在socket函数前打上断点。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> gdb init</span><br><span class="line"><span class="meta">$</span> (gdb) break socket</span><br></pre></td></tr></table></figure>
+
+<p>打开汇编窗口，查看代码运行情况</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> (gdb) layout asm</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，程序在socket函数入口处停下，下一条汇编指令是一个<code>syscall</code>的系统调用。</p>
+<h3 id="反汇编init"><a href="#反汇编init" class="headerlink" title="反汇编init"></a>反汇编<code>init</code></h3><p>对<code>init</code>进行反汇编</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> objdump -d init &gt; init_ASM.txt</span><br></pre></td></tr></table></figure>
+
+<p>查看<code>init_ASM.txt</code>文件，在第104553行找到socket对应的系统调用。</p>
+<p>证明对于socket api的调用是通过socketcall这个特殊中断来实现的。</p>
+<h3 id="syscall的具体实现"><a href="#syscall的具体实现" class="headerlink" title="syscall的具体实现"></a>syscall的具体实现</h3><p>利用同样的办法，我们按照上一节的方法启动qemu进行远程调试，设置如下断点:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> (gdb) break sys_socketcall</span><br></pre></td></tr></table></figure>
+
+<p>跟踪到一个关键函数：<code>SYSCALL_DEFINE2()</code>，它位于<code>linux-5.0.1/net/socket.c</code>之中。<br>关键代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span> (call) &#123;</span><br><span class="line">	<span class="keyword">case</span> SYS_SOCKET:</span><br><span class="line">		err = __sys_socket(a0, a1, a[<span class="number">2</span>]);</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	<span class="keyword">case</span> SYS_BIND:</span><br><span class="line">		err = __sys_bind(a0, (struct sockaddr __user *)a1, a[<span class="number">2</span>]);</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	<span class="keyword">case</span> SYS_CONNECT:</span><br><span class="line">		err = __sys_connect(a0, (struct sockaddr __user *)a1, a[<span class="number">2</span>]);</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	<span class="keyword">case</span> SYS_LISTEN:</span><br><span class="line">		err = __sys_listen(a0, a1);</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	<span class="keyword">case</span> SYS_ACCEPT:</span><br><span class="line">		err = __sys_accept4(a0, (struct sockaddr __user *)a1,</span><br><span class="line">				    (<span class="keyword">int</span> __user *)a[<span class="number">2</span>], <span class="number">0</span>);</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	<span class="comment">// ... 省略其余部分</span></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可见，每次socket都会调用同一个函数，通过传入的call值不同，在分支语句中执行对应的系统服务例程。以<code>__sys_socket()</code>为例，其源码位于同一文件下，也是C语言实现的：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> __sys_socket(<span class="keyword">int</span> family, <span class="keyword">int</span> type, <span class="keyword">int</span> protocol)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">int</span> retval;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">socket</span> *<span class="title">sock</span>;</span></span><br><span class="line">	<span class="keyword">int</span> flags;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* Check the SOCK_* constants for consistency.  */</span></span><br><span class="line">	BUILD_BUG_ON(SOCK_CLOEXEC != O_CLOEXEC);</span><br><span class="line">	BUILD_BUG_ON((SOCK_MAX | SOCK_TYPE_MASK) != SOCK_TYPE_MASK);</span><br><span class="line">	BUILD_BUG_ON(SOCK_CLOEXEC &amp; SOCK_TYPE_MASK);</span><br><span class="line">	BUILD_BUG_ON(SOCK_NONBLOCK &amp; SOCK_TYPE_MASK);</span><br><span class="line"></span><br><span class="line">	flags = type &amp; ~SOCK_TYPE_MASK;</span><br><span class="line">	<span class="keyword">if</span> (flags &amp; ~(SOCK_CLOEXEC | SOCK_NONBLOCK))</span><br><span class="line">		<span class="keyword">return</span> -EINVAL;</span><br><span class="line">	type &amp;= SOCK_TYPE_MASK;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (SOCK_NONBLOCK != O_NONBLOCK &amp;&amp; (flags &amp; SOCK_NONBLOCK))</span><br><span class="line">		flags = (flags &amp; ~SOCK_NONBLOCK) | O_NONBLOCK;</span><br><span class="line"></span><br><span class="line">	retval = sock_create(family, type, protocol, &amp;sock);</span><br><span class="line">	<span class="keyword">if</span> (retval &lt; <span class="number">0</span>)</span><br><span class="line">		<span class="keyword">return</span> retval;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> sock_map_fd(sock, flags &amp; (O_CLOEXEC | O_NONBLOCK));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-2-Socket封装网络协议的多态机制"><a href="#2-2-Socket封装网络协议的多态机制" class="headerlink" title="2.2 Socket封装网络协议的多态机制"></a>2.2 Socket封装网络协议的多态机制</h2><p>由此可见，每次socket都会调用同一个函数，通过传入的call值不同，在分支语句中执行对应的系统服务例程。以<code>__sys_socket()</code>为例，其源码位于同一文件下，也是C语言实现的：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> __sys_socket(<span class="keyword">int</span> family, <span class="keyword">int</span> type, <span class="keyword">int</span> protocol)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">int</span> retval;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">socket</span> *<span class="title">sock</span>;</span></span><br><span class="line">	<span class="keyword">int</span> flags;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* Check the SOCK_* constants for consistency.  */</span></span><br><span class="line">	BUILD_BUG_ON(SOCK_CLOEXEC != O_CLOEXEC);</span><br><span class="line">	BUILD_BUG_ON((SOCK_MAX | SOCK_TYPE_MASK) != SOCK_TYPE_MASK);</span><br><span class="line">	BUILD_BUG_ON(SOCK_CLOEXEC &amp; SOCK_TYPE_MASK);</span><br><span class="line">	BUILD_BUG_ON(SOCK_NONBLOCK &amp; SOCK_TYPE_MASK);</span><br><span class="line"></span><br><span class="line">	flags = type &amp; ~SOCK_TYPE_MASK;</span><br><span class="line">	<span class="keyword">if</span> (flags &amp; ~(SOCK_CLOEXEC | SOCK_NONBLOCK))</span><br><span class="line">		<span class="keyword">return</span> -EINVAL;</span><br><span class="line">	type &amp;= SOCK_TYPE_MASK;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (SOCK_NONBLOCK != O_NONBLOCK &amp;&amp; (flags &amp; SOCK_NONBLOCK))</span><br><span class="line">		flags = (flags &amp; ~SOCK_NONBLOCK) | O_NONBLOCK;</span><br><span class="line"></span><br><span class="line">	retval = sock_create(family, type, protocol, &amp;sock);</span><br><span class="line">	<span class="keyword">if</span> (retval &lt; <span class="number">0</span>)</span><br><span class="line">		<span class="keyword">return</span> retval;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> sock_map_fd(sock, flags &amp; (O_CLOEXEC | O_NONBLOCK));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意到函数的传入参数中有一个<code>protocol</code>变量，它用来指定传入的协议是多少。对于系统底层来说，不同的protocol值对应不同的协议类型，而对于socket通信来说，它只负责从高层接受这个字段值，然后交付更底层的函数，在这里，调用到的<code>sock_create</code>代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> __sock_create(struct net *net, <span class="keyword">int</span> family, <span class="keyword">int</span> type, <span class="keyword">int</span> protocol,</span><br><span class="line">			 struct socket **res, <span class="keyword">int</span> kern)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">int</span> err;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">socket</span> *<span class="title">sock</span>;</span></span><br><span class="line">	<span class="keyword">const</span> <span class="class"><span class="keyword">struct</span> <span class="title">net_proto_family</span> *<span class="title">pf</span>;</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 *      Check protocol is in range</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">if</span> (family &lt; <span class="number">0</span> || family &gt;= NPROTO)</span><br><span class="line">		<span class="keyword">return</span> -EAFNOSUPPORT;</span><br><span class="line">	<span class="keyword">if</span> (type &lt; <span class="number">0</span> || type &gt;= SOCK_MAX)</span><br><span class="line">		<span class="keyword">return</span> -EINVAL;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* Compatibility.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">	   This uglymoron is moved from INET layer to here to avoid</span></span><br><span class="line"><span class="comment">	   deadlock in module load.</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">if</span> (family == PF_INET &amp;&amp; type == SOCK_PACKET) &#123;</span><br><span class="line">		pr_info_once(<span class="string">"%s uses obsolete (PF_INET,SOCK_PACKET)\n"</span>,</span><br><span class="line">			     current-&gt;comm);</span><br><span class="line">		family = PF_PACKET;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	err = security_socket_create(family, type, protocol, kern);</span><br><span class="line">	<span class="keyword">if</span> (err)</span><br><span class="line">		<span class="keyword">return</span> err;</span><br><span class="line">    <span class="comment">// 省略后文</span></span><br></pre></td></tr></table></figure>
+
+<p>可以发现这个函数仍然不是最底层的函数，它根据情况继续调用<code>security_socket_creat()</code>，或者返回协议错误信息。</p>
+<p>从代码上来看，Socket封装协议细节，使用到的应该是名为<code>socket</code>的结构体，在<code>__sys_bind()</code>等函数中，协议字段作为地址长度被传入，说明对于socket来说是通过判断协议字段长度来区分ipv4和ipv6两种不同协议的。在<code>socket</code>结构体中，有一个名为<code>sk_family</code>的字段，通过它的取值不同来判断这个socket是使用ipv4还是ipv6。可以从<code>socket.c</code>中的代码印证这一点：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* This routine returns the IP overhead imposed by a socket i.e.</span></span><br><span class="line"><span class="comment"> * the length of the underlying IP header, depending on whether</span></span><br><span class="line"><span class="comment"> * this is an IPv4 or IPv6 socket and the length from IP options turned</span></span><br><span class="line"><span class="comment"> * on at the socket. Assumes that the caller has a lock on the socket.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function">u32 <span class="title">kernel_sock_ip_overhead</span><span class="params">(struct sock *sk)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">inet_sock</span> *<span class="title">inet</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">ip_options_rcu</span> *<span class="title">opt</span>;</span></span><br><span class="line">	u32 overhead = <span class="number">0</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> IS_ENABLED(CONFIG_IPV6)</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">ipv6_pinfo</span> *<span class="title">np</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">ipv6_txoptions</span> *<span class="title">optv6</span> = <span class="title">NULL</span>;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* IS_ENABLED(CONFIG_IPV6) */</span></span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (!sk)</span><br><span class="line">		<span class="keyword">return</span> overhead;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">switch</span> (sk-&gt;sk_family) &#123;</span><br><span class="line">	<span class="keyword">case</span> AF_INET:</span><br><span class="line">		inet = inet_sk(sk);</span><br><span class="line">		overhead += <span class="keyword">sizeof</span>(struct iphdr);</span><br><span class="line">		opt = rcu_dereference_protected(inet-&gt;inet_opt,</span><br><span class="line">						sock_owned_by_user(sk));</span><br><span class="line">		<span class="keyword">if</span> (opt)</span><br><span class="line">			overhead += opt-&gt;opt.optlen;</span><br><span class="line">		<span class="keyword">return</span> overhead;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> IS_ENABLED(CONFIG_IPV6)</span></span><br><span class="line">	<span class="keyword">case</span> AF_INET6:</span><br><span class="line">		np = inet6_sk(sk);</span><br><span class="line">		overhead += <span class="keyword">sizeof</span>(struct ipv6hdr);</span><br><span class="line">		<span class="keyword">if</span> (np)</span><br><span class="line">			optv6 = rcu_dereference_protected(np-&gt;opt,</span><br><span class="line">							  sock_owned_by_user(sk));</span><br><span class="line">		<span class="keyword">if</span> (optv6)</span><br><span class="line">			overhead += (optv6-&gt;opt_flen + optv6-&gt;opt_nflen);</span><br><span class="line">		<span class="keyword">return</span> overhead;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* IS_ENABLED(CONFIG_IPV6) */</span></span></span><br><span class="line">	<span class="keyword">default</span>: <span class="comment">/* Returns 0 overhead if the socket is not ipv4 or ipv6 */</span></span><br><span class="line">		<span class="keyword">return</span> overhead;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">EXPORT_SYMBOL(kernel_sock_ip_overhead);</span><br></pre></td></tr></table></figure>
+
+<p>综上所述，socket实现了协议封装的多态，它通过结构体的形式，用协议字段的长度作为划分协议的依据，以此将ipv4和ipv6区分开来。而对于调用这些函数和api的高层来说，不管自己是什么协议都调用同样的函数。</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>TSheng</span>
+                    </p>
+                
+                
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Keep <strong>CALM<strong>, keep <strong>GOING<strong>!</strong></strong></strong></strong></span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2019/12/24/p287/">寻找重复数</a>
+            
+            
+            <a class="next" rel="next" href="/2019/12/15/cpp/cpp-notes/">C++笔记</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© TSheng | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>
