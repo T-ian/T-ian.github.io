@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+
+<title>E5 | T-ian</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Home</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Home</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">E5</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">TSheng</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">十二月 24, 2019&nbsp;&nbsp;18:44:13</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h1><p>TCP通过校验和、序列号、确认应答、重发控制、连接管理和窗口控制实现可靠传输。</p>
+<p>TCP通过确认应答ACK来实现有保障的数据传输，但是由于各种原因，目标主机可能无法收到ACK信号，导致源主机不停重发数据。为此，引入序列号与确认信号相结合，实现有效的重发控制。</p>
+<p>作为面向连接的协议，TCP在数据通信前，通过TCP首部发送一个SYN包作为建立连接的请求等待确认应答。一个连接的建立与断开至少要来回发送7个包才能完成。其中建立连接三次握手，需要发送3个包。切断连接四次挥手，需要发送4个包。</p>
+<h1 id="LINUX-amp-TCP"><a href="#LINUX-amp-TCP" class="headerlink" title="LINUX &amp; TCP"></a>LINUX &amp; TCP</h1><p>下图展示了LINUX中TCP客户机和服务器交互时调用的基本套接字函数。</p>
+<p>// 图 TCP函数</p>
+<p>一个进程要进行网络读写，第一个执行的就是<code>socket()</code>，它定义在<code>socket.h</code>文件中：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">socket</span><span class="params">(<span class="keyword">int</span> family, <span class="keyword">int</span> type, <span class="keyword">int</span> protocol)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>其中<code>family</code>指定协议类型簇（IPv4、IPv6、Unix域协议、路由套接字、密钥套接字），<code>type</code>指定套接字类型，<code>protocol</code>指定协议的类型常量（TCP、UDP、SCTP）。<code>socket()</code>函数返回套接字描述符。</p>
+<p>// 图 socket函数调用的函数栈</p>
+<h2 id="跟踪调用栈"><a href="#跟踪调用栈" class="headerlink" title="跟踪调用栈"></a>跟踪调用栈</h2><p>启动qemuOS，打开GDB调试，连接到远程。在<code>__sys_socket()</code>函数处打上断点，追踪函数调用栈：</p>
+<p>// 图 断点调试</p>
+<p>在gdb中根据情况交替使用<code>next</code>和<code>step</code>命令，追踪程序运行。函数调用了<code>__sock_create()</code>实际执行socket创建任务。对<code>__socket_create()</code>进行追踪。</p>
+<h3 id="sock-alloc"><a href="#sock-alloc" class="headerlink" title="sock_alloc()"></a>sock_alloc()</h3><p>在<code>__socket_create()</code>中，又调用了<code>sock_alloc()</code>函数将socket分配给一个结构体变量<code>sock</code>。<br>这里，<code>sock</code>的类型为<code>struct socket*</code>，在linux源码目录下使用正则表达式<code>find -name &quot;*.h&quot; | xargs grep &quot;strcut socket {&quot; -rn</code>找到该结构体定义在<code>./linux-5.0.1/include/linux/net.h</code>中，如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">socket</span> &#123;</span></span><br><span class="line">	socket_state		state;</span><br><span class="line">	<span class="keyword">short</span>			type;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">long</span>		flags;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">socket_wq</span>	*<span class="title">wq</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">file</span>		*<span class="title">file</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">sock</span>		*<span class="title">sk</span>;</span></span><br><span class="line">	<span class="keyword">const</span> <span class="class"><span class="keyword">struct</span> <span class="title">proto_ops</span>	*<span class="title">ops</span>;</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><code>state</code>是socket的状态，<code>type</code>是类型，<code>flags</code>是标志位，<code>eq</code>是等待队列，<code>file</code>是指针列表。<code>sock</code>是一个重要的结构体，同理可以找到结构体sock的定义，根据注释描述，它表示一个网络层的socket。</p>
+<h3 id="new-inode-pseudo"><a href="#new-inode-pseudo" class="headerlink" title="new_inode_pseudo()"></a>new_inode_pseudo()</h3><p>接着调用了<code>new_inode_pseudo()</code>函数，在相应的文件系统中创建一个inode。其代码位于<code>./linux-5.0.1/fs/inode.c</code>中：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">struct inode *<span class="title">new_inode_pseudo</span><span class="params">(struct super_block *sb)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">inode</span> *<span class="title">inode</span> = <span class="title">alloc_inode</span>(<span class="title">sb</span>);</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (inode) &#123;</span><br><span class="line">		spin_lock(&amp;inode-&gt;i_lock);</span><br><span class="line">		inode-&gt;i_state = <span class="number">0</span>;</span><br><span class="line">		spin_unlock(&amp;inode-&gt;i_lock);</span><br><span class="line">		INIT_LIST_HEAD(&amp;inode-&gt;i_sb_list);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> inode;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>inode为socket文件系统中的节点。inode和socket对象是连结在一起的，可以根据inode取得socket对象。分配inode后，应用程序可以通过文件描述符对socket进行读写访问。</p>
+<h3 id="协议簇初始化socket"><a href="#协议簇初始化socket" class="headerlink" title="协议簇初始化socket"></a>协议簇初始化socket</h3><p>继续往下，有一条语句：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pf = rcu_dereference(net_families[family]);</span><br></pre></td></tr></table></figure>
+
+<p>用于查找内核初始化时注册的协议簇。当传入的<code>family</code>字段存在于协议簇中时，又继续执行一条语句：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">err = pf-&gt;create(net, sock, protocol, kern);</span><br></pre></td></tr></table></figure>
+
+<p>这一步调用的是<code>inet_create()</code>函数，它位于<code>./net/ipv4/Af_inet.c</code>中。</p>
+<h4 id="inet-create"><a href="#inet-create" class="headerlink" title="inet_create()"></a>inet_create()</h4><p>这个函数主要完成四个工作：</p>
+<ol>
+<li><p>将socket的state设置为SS_UNCONNECTED</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sock-&gt;state = SS_UNCONNECTED;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>根据type字段找到对应套接字类型</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">lookup_protocol:</span><br><span class="line">	err = -ESOCKTNOSUPPORT;</span><br><span class="line">	rcu_read_lock();</span><br><span class="line">	list_for_each_entry_rcu(answer, &amp;inetsw[sock-&gt;type], <span class="built_in">list</span>) &#123;</span><br><span class="line"></span><br><span class="line">		err = <span class="number">0</span>;</span><br><span class="line">		<span class="comment">/* Check the non-wild match. */</span></span><br><span class="line">		<span class="keyword">if</span> (protocol == answer-&gt;protocol) &#123;</span><br><span class="line">			<span class="keyword">if</span> (protocol != IPPROTO_IP)</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="comment">/* Check for the two wild cases. */</span></span><br><span class="line">			<span class="keyword">if</span> (IPPROTO_IP == protocol) &#123;</span><br><span class="line">				protocol = answer-&gt;protocol;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> (IPPROTO_IP == answer-&gt;protocol)</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		err = -EPROTONOSUPPORT;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (unlikely(err)) &#123;</span><br><span class="line">		<span class="keyword">if</span> (try_loading_module &lt; <span class="number">2</span>) &#123;</span><br><span class="line">			rcu_read_unlock();</span><br><span class="line">			<span class="comment">/*</span></span><br><span class="line"><span class="comment">			 * Be more specific, e.g. net-pf-2-proto-132-type-1</span></span><br><span class="line"><span class="comment">			 * (net-pf-PF_INET-proto-IPPROTO_SCTP-type-SOCK_STREAM)</span></span><br><span class="line"><span class="comment">			 */</span></span><br><span class="line">			<span class="keyword">if</span> (++try_loading_module == <span class="number">1</span>)</span><br><span class="line">				request_module(<span class="string">"net-pf-%d-proto-%d-type-%d"</span>,</span><br><span class="line">					       PF_INET, protocol, sock-&gt;type);</span><br><span class="line">			<span class="comment">/*</span></span><br><span class="line"><span class="comment">			 * Fall back to generic, e.g. net-pf-2-proto-132</span></span><br><span class="line"><span class="comment">			 * (net-pf-PF_INET-proto-IPPROTO_SCTP)</span></span><br><span class="line"><span class="comment">			 */</span></span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				request_module(<span class="string">"net-pf-%d-proto-%d"</span>,</span><br><span class="line">					       PF_INET, protocol);</span><br><span class="line">			<span class="keyword">goto</span> lookup_protocol;</span><br><span class="line">		&#125; <span class="keyword">else</span></span><br><span class="line">			<span class="keyword">goto</span> out_rcu_unlock;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	err = -EPERM;</span><br><span class="line">	<span class="keyword">if</span> (sock-&gt;type == SOCK_RAW &amp;&amp; !kern &amp;&amp;</span><br><span class="line">	    !ns_capable(net-&gt;user_ns, CAP_NET_RAW))</span><br><span class="line">		<span class="keyword">goto</span> out_rcu_unlock;</span><br><span class="line"></span><br><span class="line">	sock-&gt;ops = answer-&gt;ops;</span><br><span class="line">	answer_prot = answer-&gt;prot;</span><br><span class="line">	answer_flags = answer-&gt;flags;</span><br><span class="line">	rcu_read_unlock();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>初始化socket的sk</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sk = sk_alloc(net, PF_INET, GFP_KERNEL, answer_prot, kern);</span><br><span class="line"><span class="keyword">if</span> (!sk)</span><br><span class="line">    <span class="keyword">goto</span> out;</span><br><span class="line"></span><br><span class="line">err = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">if</span> (INET_PROTOSW_REUSE &amp; answer_flags)</span><br><span class="line">    sk-&gt;sk_reuse = SK_CAN_REUSE;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>建立socket与sock之间的关系</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">inet = inet_sk(sk);</span><br><span class="line">inet-&gt;is_icsk = (INET_PROTOSW_ICSK &amp; answer_flags) != <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">inet-&gt;nodefrag = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (SOCK_RAW == sock-&gt;type) &#123;</span><br><span class="line">    inet-&gt;inet_num = protocol;</span><br><span class="line">    <span class="keyword">if</span> (IPPROTO_RAW == protocol)</span><br><span class="line">        inet-&gt;hdrincl = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (net-&gt;ipv4.sysctl_ip_no_pmtu_disc)</span><br><span class="line">    inet-&gt;pmtudisc = IP_PMTUDISC_DONT;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    inet-&gt;pmtudisc = IP_PMTUDISC_WANT;</span><br><span class="line"></span><br><span class="line">inet-&gt;inet_id = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">sock_init_data(sock, sk);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用具体协议初始化socket<br>这一步通过hook机制（回调函数）实现。</p>
+</li>
+</ol>
+<h2 id="回到-sys-socket"><a href="#回到-sys-socket" class="headerlink" title="回到__sys_socket()"></a>回到<code>__sys_socket()</code></h2><p>在函数的最后使用<code>sock_map_fd()</code>，将初始化好的socket与文件系统关联：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> sock_map_fd(sock, flags &amp; (O_CLOEXEC | O_NONBLOCK));</span><br></pre></td></tr></table></figure>
+
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p>[1] <a href="https://www.jianshu.com/p/5d82a685b5b6" target="_blank" rel="noopener">https://www.jianshu.com/p/5d82a685b5b6</a></p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>TSheng</span>
+                    </p>
+                
+                
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Keep <strong>CALM<strong>, keep <strong>GOING<strong>!</strong></strong></strong></strong></span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2019/12/25/CodingTools/">解题工具</a>
+            
+            
+            <a class="next" rel="next" href="/2019/12/24/p287/">寻找重复数</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© TSheng | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>

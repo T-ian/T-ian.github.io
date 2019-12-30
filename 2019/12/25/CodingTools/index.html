@@ -7,7 +7,7 @@
 
 
 
-<title>寻找重复数 | T-ian</title>
+<title>解题工具 | T-ian</title>
 
 
 
@@ -165,7 +165,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">寻找重复数</h1>
+            <h1 class="post-title">解题工具</h1>
             
                 <div class="post-meta">
                     
@@ -174,7 +174,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">十二月 24, 2019&nbsp;&nbsp;16:59:26</a>
+                        Date: <a href="#">十二月 25, 2019&nbsp;&nbsp;21:28:35</a>
                         </span>
                     
                     
@@ -183,14 +183,22 @@
         </header>
 
         <div class="post-content">
-            <h1 id="有环链表问题"><a href="#有环链表问题" class="headerlink" title="有环链表问题"></a>有环链表问题</h1><h2 id="快慢指针确定有无环"><a href="#快慢指针确定有无环" class="headerlink" title="快慢指针确定有无环"></a>快慢指针确定有无环</h2><p>从头节点开始，slow每次前进一步，fast每次前进两步，当slow和fast相遇时，链表有环，且slow所走的步数恰好等于链表环长度整数倍。</p>
-<ul>
-<li>证明<br>初始时有slow=fast，假设一共进行了x次slow和fast的移动后，slow和fast相遇了。则slow一共前进了x格，fast前进了2<em>x格。又因为初始时slow和fast一致，相遇时fast比slow多走了x格，当fast第一次经过相遇点时，我们假设slow走了y步，当slow又走了x-y步和fast在相遇点相遇时，fast和第一次经过这个点相比多走的格数等于链表环的整数倍。（注意，虽然fast每次走两步，但是fast确确实实路过了环上的每一个点）。假设链表长度为len，则``2x-x = x = n</em>len``，n为整数。</li>
+            <h1 id="算法簇"><a href="#算法簇" class="headerlink" title="算法簇"></a>算法簇</h1><h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><h2 id="贪心算法"><a href="#贪心算法" class="headerlink" title="贪心算法"></a>贪心算法</h2><h2 id="深度优先遍历算法"><a href="#深度优先遍历算法" class="headerlink" title="深度优先遍历算法"></a>深度优先遍历算法</h2><h2 id="广度优先遍历算法"><a href="#广度优先遍历算法" class="headerlink" title="广度优先遍历算法"></a>广度优先遍历算法</h2><h2 id="“鸽子洞”算法"><a href="#“鸽子洞”算法" class="headerlink" title="“鸽子洞”算法"></a>“鸽子洞”算法</h2><ul>
+<li>长度为n+1的数组包含从1到n连续整数的问题</li>
 </ul>
-<h2 id="再走m步，确定环入口"><a href="#再走m步，确定环入口" class="headerlink" title="再走m步，确定环入口"></a>再走m步，确定环入口</h2><p>在相遇点slow/fast的基础上，entry从头节点开始移动，每次entry和slow/fast都移动一步，当entry和slow/fast相遇时，相遇点就是环的入口结点。</p>
-<ul>
-<li>证明<br>首先一个很显然的道理，如果entry和slow/fast没有在入口处相遇，那么它们将在环中按照每次一格前进，它们永远也不会相遇，所以如果entry和slow/fast相遇，它们只能是在入口处相遇。<br>设slow/fast在上面x步的基础上又走了m步和entry相遇，可知entry也走了m步。对于slow结点来说，无论它和entry在哪里相遇，这个相遇点一定在环内（因为不可能出环了），那么这个相遇点一定是slow曾经经过的点。<br>设从slow/fast第一次相遇的点再前进s步到达入口点，则起始点距离环入口点步数等于<code>x+s-len</code>，代入<code>x = n*len</code>，可得起始点距离入口点<code>(n-1)*len + s</code>步。m一定是大于s的，我们不妨让entry和slow/fast全都先前进s步，则此时slow/fast到达入口点，而entry距离入口点的位置只剩下<code>(n-1)*len</code>步，如果entry前进<code>(n-1)*len</code>步到达入口点，那么slow/fast一定也在入口处的等着它。</li>
+<h1 id="数据结构簇"><a href="#数据结构簇" class="headerlink" title="数据结构簇"></a>数据结构簇</h1><h2 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h2><h2 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h2><h2 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h2><ul>
+<li>二叉树层序遍历<h2 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h2></li>
 </ul>
+<h1 id="算法思想簇"><a href="#算法思想簇" class="headerlink" title="算法思想簇"></a>算法思想簇</h1><h2 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h2><h2 id="分治思想"><a href="#分治思想" class="headerlink" title="分治思想"></a>分治思想</h2><ul>
+<li>快速排序</li>
+</ul>
+<h2 id="奇偶统一思想"><a href="#奇偶统一思想" class="headerlink" title="奇偶统一思想"></a>奇偶统一思想</h2><p>比如两个字符数组一个长度为奇数，一个为偶数：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span>[] charr1 = &#123;<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>&#125;;</span><br><span class="line"><span class="keyword">char</span>[] charr2 = &#123;<span class="string">'a'</span>, <span class="string">'b'</span>&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>使用见缝插针的方法，把它们都变成奇数数组：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"abc"</span>:<span class="number">3</span> -&gt; <span class="string">"#a#b#c#"</span>:<span class="number">7</span></span><br><span class="line"><span class="string">"ab"</span>:<span class="number">2</span> -&gt; <span class="string">"#a#b#"</span>: <span class="number">5</span></span><br></pre></td></tr></table></figure>
+
+<p>原理是，任意N个数排列，它们之间加上两端都有N+1个空隙，加上这些数，共有2N-1个位置，一定是奇数。</p>
 
         </div>
 
@@ -232,10 +240,10 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2019/12/24/网络程序设计课作业/E5/">E5</a>
+                <a class="prev" rel="prev" href="/2019/12/30/QuickSort/">学习快速排序算法</a>
             
             
-            <a class="next" rel="next" href="/2019/12/19/网络程序设计课作业/E4/">e3</a>
+            <a class="next" rel="next" href="/2019/12/24/网络程序设计课作业/E5/">E5</a>
             
         </section>
 
